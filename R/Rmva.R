@@ -366,8 +366,7 @@ function (A, M, crit1=0.025, crit2=crit1, nclass=10, ...)
 #*/########################################################################
  
 
-plot.confband.points<-
-function (A, M, crit1=0.025, crit2=crit1, nclass=10, col.ex=NULL, ...)
+plot.confband.points<-function (A, M, crit1=0.025, crit2=crit1, nclass=10, col.ex=NULL, ...)
 {
   ## quantile.na removes infinite too...quantile(x, na.rm=F) doesn't.
   

@@ -20,7 +20,7 @@
 }
 \usage{
 init.name.exp(Robject=F)
-init.show.exp("batch")
+init.show.exp(batch)
 }
 
 \arguments{
@@ -37,7 +37,7 @@ init.show.exp("batch")
     path name for each file.} 
 }
 \references{Spot manual
-\url{http://www.cmis.csiro.au/iap/Spot/spotmanual.htm} 
+\url{http://www.cmis.csiro.au/iap/Spot/spotmanual.htm}}
   
 \author{Yee Hwa Yang, \email{yeehwa@stat.berkeley.edu}}
 

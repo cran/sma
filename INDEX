@@ -12,8 +12,8 @@ init.read.exp            Reads the Output of the Computed Statistics
 is.odd                   Determining if a Value is Odd or Even
 na                       Basic Statistical Functions for Handling Missing
                          Values
-plot.bayesian            Plots an Odds Ratio of Each Gene in a Multi-
-                         slide microarray Experiment
+plot.bayesian            Plots lodscore vs effect estimate (the output of
+                         stat.bayesian() or stat.bay.est()).
 plot.confband.lines      Adding Lines Satisfying a Confidence Criterion
                          to the Current M vs A Plot
 plot.confband.points     Highlights a Set of Points on the Current M vs A
@@ -40,6 +40,8 @@ internal functions       Internal sma functions
 stat.Chen                Apply Chen's single slide method
 stat.ChurSap             Apply Sapir and Churchills single slide method
 stat.Newton              Apply Newtons single slide method
+stat.bay.est             Calculates an Odds Ratio for Each Gene in a
+                         Multi-slide Microarray Experiment.
 stat.bayesian            Calculates an Odds Ratio of Each Gene in a
                          Multi-slide microarray Experiment
 stat.bwss                Between and Within Group Sum of Squares

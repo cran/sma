@@ -20,7 +20,7 @@ Microarray Experiments}
 }
 
 \usage{
-init.addinfo()
+init.addinfo(batch, attri, dataname=NULL, ...)
 }
 
 \arguments{

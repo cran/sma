@@ -2,56 +2,34 @@
 # Statistics for Microarray Analysis
 # Bayesian Method
 #
-# Date : November 21, 2000
+# Date : October 2, 2001
 #
 # History:
-#      18 May 2001Merged RBayesian2 changes from Ingrid into RBayesian: bmb
 #
 # Authors: Ingrid Lönnstedt  and Yee Hwa (Jean) Yang.
-# First written by Ingrid Lönnstedt and modify by Jean.
+# Written by Ingrid with help from Jean.
 ##########################################################################
-#This method calculate a lodscore (lods) for each gene in an experiment, using the normalized M-values (output from stat.ma), the number of slides (nb), and the number of replicates for each gene within each slide (nw). If there are j replicates within slides, the vectors of M-values for each slide should be on the form M11, ..., M1j, M21, ...M2j, ..., Mgj, where g is the number of genes.
 
-#Xprep 	is a list containing means, sums of squares etc needed for the lods
-#	is produced by setup.bayesian (via stat.bayesian or plot.bayesian)
-#	is calculated from X, nb and nw
-#	depends only on the data, not on the prior parameters
-#	Once calculated there is no need for X, nb or nw
+#stat.bayesian calculates a lodscore (lods) for each gene in an experiment, using the normalized M-values (output from stat.ma), the number of slides (nb), and the number of replicates for each gene within each slide (nw). If there are j replicates within slides, the vectors of M-values for each slide should be on the form M11, ..., M1j, M21, ...M2j, ..., Mgj, where g is the number of genes.
 
-#para	are the parameters needed for the calculation of lods
-#	can be produced by stat.bayesian or plot.bayesian
-#	are estimated from Xprep
+#stat.bay.est calculates a lodscore (lods) for each gene in an experiment, using independent, sufficient statistics for the effect and its variance of each gene. 
 
-#Contents in Xprep:
-
-#nw=number of duplicates within slides (default is 1)
-#nb=number of duplicates between slides
-#Mbar=overall mean for a gene
-#SSB=sum of squares between
-#SSW=sum of squares within
-
-#Contents in para:
-
-#v, a =parameters in the prior for the variance.
-#c=parameter in the prior for the mean.
-#p=proportion of genes that are differentially expressed.
-#k=ratio of variances between:within slides.
-
+#plot.bayesian plots the results of any of the above, highlighting genes which meet userdefined criteria.
 
 ######################################################
 # Main Program
 ######################################################
 
-stat.bayesian <- function(X=NULL, nb=NULL, nw=1, Xprep=NULL, para=list(p=0.01, v = NULL, a=NULL, c = NULL,k=NULL))
+stat.bayesian <- function(M=NULL, nb=NULL, nw=1, Xprep=NULL, para=list(p=0.01, v = NULL, a=NULL, c = NULL,k=NULL))
   {
-    ## Input X = List(A, M) (output from stat.ma) as well as nb (and nw if >1)
+    ## Input M (output from stat.ma) as well as nb (and nw if nw>1)
     ## Xprep and para are calculated and used for calculating lods.
-    ## If Xprep is given in the function input, X, nb and nw are unnecessary.
+    ## If Xprep is given in the function input, M, nb and nw are unnecessary.
 
     ## Setting up Data
     if(is.null(Xprep))
       {
-    	Xprep<- setup.bayesian(X=X, nb=nb, nw=nw)
+    	Xprep<- setup.bayesian(M=M, nb=nb, nw=nw)
       }
     nb<-Xprep$nb
     nw<-Xprep$nw
@@ -62,79 +40,83 @@ stat.bayesian <- function(X=NULL, nb=NULL, nw=1, Xprep=NULL, para=list(p=0.01, v
     ## Setting up parameters
      if(is.null(para$v) | is.null(para$a)) 
      {
-	va <- va.func(SSB/(nb-1), vstart=list(v0=0.1, vn=nb+3, vstep=0.1), astart=list(a0=0.001, an=0.05, astep=0.001))
-	para$v<-va$v
-	para$a<-va$a
+	va <- va.func(Vest=SSB/(nb-1), k=nb)
+	if (is.null(para$v)) para$v<-va$v
+	if (is.null(para$a)) para$a<-va$a
      }
 
      if(is.null(para$k)) 
      {
-	if(is.null(SSW)) para$k<-0
-	else para$k<-median(SSB/(nb-1)/SSW*nb*(nw-1))
+	if(is.null(SSW)) para$k<-0  else para$k<-median(SSB/(nb-1)/SSW*nb*(nw-1))
      }
 
-     if(is.null(para$c)) para$c<-c.min(para=para, Xprep=Xprep)
-     if(is.null(para$c)) para$c<-0.7
+     if(is.null(para$c)) para$c<-c.func(Xprep=Xprep, para=para)
+
      lods<-lods.func(Xprep, para)
      list(Xprep=Xprep, lods=lods,para=para)
 }
 
-plot.bayesian <- function(X=NULL, nb=NULL, nw=1, lods=NULL, Xprep=NULL, para=list(p=0.01, v = NULL, a=NULL, c = NULL,k=NULL))
 
+stat.bay.est <- function(M=NULL, Xprep=NULL, para=list(p=0.01, v = NULL, a=NULL, c = NULL))
   {
-    ## Input X = List(A, M) (output from stat.ma) as well as nb (and nw if >1)
-    ## Xprep and para are calculated and used for plotting lods.
-    ## If Xprep is given in the function input, X, nb and nw are unnecessary.
+    ## Input Xprep or M (output from stat.ma).
+    ## If M is given, stat.bay.est assumes the experiment consists of ncol(M) microarray slides all measuring the same effect (which will be stimated by Mbar)
+    ## Para is calculated and used for calculating lods.
     
     ## Setting up Data
     if(is.null(Xprep))
       {
-    	Xprep<- setup.bayesian(X=X, nb=nb, nw=nw)
+    	Xprep$Mbar<-apply(M,1,mean.na)   #Effect estimate
+        Xprep$Vest<-apply(M,1,var.na)    #Variance estimate
+        Xprep$k<-ncol(M)                 #Variance constant
+        Xprep$f<-Xprep$k-1               #Degrees of freedom
       }
-    nb<-Xprep$nb
-    nw<-Xprep$nw
     Mbar<-Xprep$Mbar
-    SSW<-Xprep$SSW
-    SSB<-Xprep$SSB
+    Vest<-Xprep$Vest
+    k<-Xprep$k
+    f<-Xprep$f
 
     ## Setting up parameters
-    if(is.null(lods))
-    {
-       if(is.null(para$v) | is.null(para$a)) 
-	{
-		va <- va.func(SSB/(nb-1), vstart=list(v0=0.1, vn=nb+3, vstep=0.1), astart=list(a0=0.001, an=0.05, astep=0.001))
-		para$v<-va$v
-		para$a<-va$a
-       	}
-       if(is.null(para$k)) 
-	{
-		if(is.null(SSW)) para$k<-0
-		else para$k<-median(SSB/(nb-1)/SSW*nb*(nw-1))
-	}
-        if(is.null(para$c)) para$c<-c.min(para=para, Xprep=Xprep)
-        if(is.null(para$c)) para$c<-0.7
-       lods<-lods.func(Xprep, para)
-    }
+     if(is.null(para$v) | is.null(para$a)) 
+     {
+	va <- va.func(Vest=Vest, k=k)
+	if (is.null(para$v)) para$v<-va$v
+	if (is.null(para$a)) para$a<-va$a
+     }
 
-    ## Plotting
-    	plot(Mbar, lods, xlab="Mean", ylab="lodsratio", main="Lodsratio vs Mean", type="n")
-    	text(Mbar, lods, cex=1)
+     if(is.null(para$c)) para$c<-c.func.est(Xprep=Xprep, para=para)
+
+     lods<-lods.func.est(Xprep, para)
+     list(Xprep=Xprep, lods=lods,para=para)
 }
 
 
+plot.bayesian<-function(bay=NULL,Mbar=bay$Xprep$Mbar,lods=bay$lods, type="t",spec=50, ch=NULL, col='black'){
+  index<-NULL
+  if(type=="t") index<-(1:length(lods))[lods>sort(lods[!is.na(lods)])[length(lods[!is.na(lods)])-spec]]   
+  if(type=="c") index<-(1:length(lods))[lods >= spec]
+  if(type=="i") index<-spec                       
+  plot(Mbar, lods, xlab="Effect estimate", ylab="Lodsratio", main="Lodsratio vs Effect estimate", type="n")
+  if (!is.null(index)){
+  points(Mbar[-index], lods[-index], pch='.')    
+  if(is.null(ch))  text(Mbar[index],lods[index],labels=index,col=col)  else points(Mbar[index],lods[index],pch=ch,col=col)
+}
+  if(is.null(index)){points(Mbar, lods, pch='.')}
+}
+  
     
 ######################################################
 #Functions
 ######################################################
 
-setup.bayesian <- function(X, nb=NULL, nw=1)
+setup.bayesian <- function(M, nb=NULL, nw=1)
   {
     if (nw == 1)
     {
-	nb<-ncol(X$M)
+	nb<-ncol(M)
 	SSW<-NULL
-	SSB<-apply(X$M,1,var.na)*(nb-1)
-	Mbar<-apply(X$M,1,mean.na)
+	SSB<-apply(M,1,var.na)*(nb-1)
+	Mbar<-apply(M,1,mean.na)
     }
 
     if (nw > 1)
@@ -147,14 +129,14 @@ setup.bayesian <- function(X, nb=NULL, nw=1)
 	  {
 	    for (j in 1:nw)
 	    {
-	      Mtmp<-cbind(Mtmp,X$M[seq(j,nrow(X$M),nw),i])
+	      Mtmp<-cbind(Mtmp,M[seq(j,nrow(M),nw),i])
 	    }
 	  }
 	  Mbar<-apply(Mtmp,1,mean.na)
 
 	  Mslide<-NULL
-	  SSW<-rep(0,nrow(X$M)/nw)
-	  SSB<-rep(0,nrow(X$M)/nw)
+	  SSW<-rep(0,nrow(M)/nw)
+	  SSB<-rep(0,nrow(M)/nw)
 	  for (i in 1:nb)
 	  {
 	    Mslide<-cbind(Mslide,apply(Mtmp[,((i-1)*nw+1):(i*nw)],1,mean.na))
@@ -170,7 +152,7 @@ setup.bayesian <- function(X, nb=NULL, nw=1)
 
           for (j in 1:nw)
           {
-	    Mtmp<-cbind(Mtmp,X$M[seq(j,length.na(X$M),nw)])
+	    Mtmp<-cbind(Mtmp,M[seq(j,length(M),nw)])
 	  }
 
 	  SSB<-apply(Mtmp,1,var.na)*(nw-1)
@@ -184,15 +166,16 @@ setup.bayesian <- function(X, nb=NULL, nw=1)
 	list(Mbar=Mbar, SSB=SSB, SSW=SSW, nb=nb, nw=nw)
   }
 
-#Lods calculates the logodds ratio.
+####################################################################
+#Lods (or lods.func.est) calculates the logodds ratio.
 
-lods.func<-function(Xprep=list(Mbar=Mbar, SSB=SSB, SSW=SSW, nb=nb, nw=nw), para=list(p=p, v=v, a=a, k=k)){
+lods.func<-function(Xprep=list(Mbar=Mbar, SSB=SSB, SSW=SSW, nb=nb, nw=nw), para=list(p=p, c=c, v=v, a=a, k=k)){
    Mbar <- Xprep$Mbar            #overall means
    nb<-Xprep$nb
    nw<-Xprep$nw
    SSB <- Xprep$SSB              #sums of squares between slides
    SSW <- Xprep$SSW              #sums of squares within slides  
-   if(is.null(Xprep$SSW)) SSW <- rep(0, length.na(SSB))
+   if(is.null(Xprep$SSW)) SSW <- rep(0, length(SSB))
 
    p <- para$p
    v <- para$v
@@ -201,152 +184,140 @@ lods.func<-function(Xprep=list(Mbar=Mbar, SSB=SSB, SSW=SSW, nb=nb, nw=nw), para=
    k <- para$k
 
    odds1<-p/(1-p)
-   odds2<-c/((nb*nw) + c)
-   odds3<-(v * a + SSB + nb * nw * (Mbar^2)+k*SSW)/(v*a+SSB+ nb * nw *(Mbar^2) + k * SSW-(nb * nw * Mbar)^2/(c + nb * nw))
-   odds<-odds1*(odds2**(1/2))*(odds3**((nb*nw+v)/2-1))
+   odds2<-1/(1+nb*nw*c)
+   odds3<-a + (SSB + k*SSW)/nw/nb   
+   odds4<-(odds3+Mbar^2)/(odds3+Mbar^2/(1+nb*nw*c))
+   odds<-odds1*(odds2**(1/2))*(odds4**(v+nw*nb/2))
    log(odds)
  }
 
+lods.func.est<-function(Xprep=list(Mbar=Mbar, Vest=Vest, k=k, f=f), para=list(p=p, c=c, v=v, a=a)){
+
+   Mbar<-Xprep$Mbar
+   Vest<-Xprep$Vest
+   k<-Xprep$k
+   f<-Xprep$f
+
+   p <- para$p
+   v <- para$v
+   a <- para$a
+   c <- para$c
+
+   odds1<-p/(1-p)
+   odds2<-1/(1+k*c)
+   odds3<-a + f*Vest/k  
+   odds4<-(odds3+Mbar^2)/(odds3+Mbar^2/(1+k*c))
+   odds<-odds1*(odds2**(1/2))*(odds4**(v+f/2+1/2))
+   log(odds)
+ }
 
 ######################################################
 
-#va.func fits a chi^2 distribution to the variance (finds the parameters v (df) and a(scale)). It only checks the values of v and a in a range of values. The range of these might need to be changed.
-#va2.func also fits a chi^2 distribution to the variance, but it does it by iteration (nlm function ~ Newton Raphson). va2.func tends to get stuck in local maximas if just used starting at the estimates from the method of moments (default).
-#va.func is good, but to get a finer estimate (not really necessary!), one could use va2.func with starting values equal to the estimates from va.func. 
+#va.func estimates v and a by the method of moments, so that a*k/(2*sigma^2) ~Gamma(v,1), Vest are the genewise estimates of sigma^2 and k a constant such that the expected variance of the effect estimates are sigma^2/k. 
+
+va.func<-function(Vest, k){
+av.var<-mean.na(Vest)
+var.var<-sum.na((Vest-mean.na(Vest))^2)/(length.na(Vest)-1)
+vhat<-(2*var.var+av.var^2)/var.var
+ahat<-av.var/k*2*(vhat-1)
+list (v=vhat, a=ahat)
+}
 
 
-sq.func <- function(v, a, MSB,nclass=100, pout = F, ...)
-  {
-    index <- seq(1, length.na(MSB), round(length.na(MSB)/nclass))
-    hst<-hist((log(v*a/MSB))[index], plot=FALSE, freq=F, nclass=10)
-    theo<-dchisq(exp(hst$mids), df=v)
-    sum.na((hst$density-theo)**2)
-  }
+######################################################
+#c.func (or c.func.est) uses ls.variance and sq.func to estimate c. It uses a least squares estimate so that for all Mbar-values, Mbar~N(0,simga^2/k) and for the top p proportion of the genes, the averages are ~N(0,c*sigma^2).
 
+c.func<-function(Xprep, para){
 
-va.func <- function(MSB, vstart=list(v0=0.1, vn=nb+3, vstep=0.1), astart=list(a0=0.0001, an=0.05, astep=0.0001), pout=F, aseq=NULL, vseq=NULL){
-
-  if(is.null(vseq)) vseq<-seq(vstart$v0, vstart$vn, vstart$vstep)
-  if(is.null(aseq)) aseq<-seq(astart$a0, astart$an, astart$astep)
+#Estimate the variance sigma²
+  var.est<-mean.na(Xprep$SSB/(Xprep$nb-1))
+  start<-var.est/10/Xprep$nb
+  end<-var.est*10/Xprep$nb
   
-  sq<-matrix(0, ncol=length.na(vseq), nrow=length.na(aseq))
+  sigma2<-ls.variance(X=Xprep$Mbar[!is.na(Xprep$Mbar)], var.start=start, var.stop=end, nclass=100)*Xprep$nb
+  
+  sigma2
 
+
+#Estimate c*sigma²
+  para$c<-1.5
+  if (is.null(Xprep$SSW)) Xprep$SSW<-rep(0,length(Xprep$SSB))
+  l<-stat.bayesian(Xprep=Xprep, para=para)$lods
+  top.set<-(1:(length(Xprep$Mbar)/Xprep$nw))[!is.na(l)][rank(l[!is.na(l)])>(length.na(l)-round(length.na(l)*para$p))]
+
+  var.est<-var.na(Xprep$Mbar[top.set])
+  start<-var.est/10
+  end<-var.est*10
+  
+  csigma2<-ls.variance(X=Xprep$Mbar[top.set], var.start=start, var.stop=end, zeros=F)
+  
+  csigma2/sigma2
+}
+
+
+c.func.est<-function(Xprep, para){
+
+#Estimate the variance sigma²
+  var.est<-mean.na(Xprep$Vest)
+  start<-var.est/10/Xprep$k
+  end<-var.est*10/Xprep$k
+  
+  sigma2<-ls.variance(X=Xprep$Mbar[!is.na(Xprep$Mbar)], var.start=start, var.stop=end, nclass=100)*Xprep$k
+  
+  sigma2
+
+
+#Estimate c*sigma²
+  para$c<-1.5
+  l<-stat.bay.est(Xprep=Xprep, para=para)$lods
+  top.set<-(1:(length(Xprep$Mbar)))[!is.na(l)][rank(l[!is.na(l)])>(length.na(l)-round(length.na(l)*para$p))]
+
+  var.est<-mean.na(Xprep$Vest[top.set])
+  start<-var.est/10
+  end<-var.est*10
+  
+  csigma2<-ls.variance(X=Xprep$Mbar[top.set], var.start=start, var.stop=end, zeros=F)
+  
+  csigma2/sigma2
+}
+
+
+ls.variance<-function(X, var.start, var.stop, var.steps=100, nclass=NULL, zeros=T) {
+
+  var.seq<-seq(var.start, var.stop, (var.stop-var.start)/var.steps)
+  sq<-rep(0,length(var.seq))
   i<-0
-  for (a in aseq){
+  for (v in var.seq){
     i<-i+1
-    j<-0
-    for (v in vseq){
-      j<-j+1
-      sq[i,j] <- sq.func(v, a, MSB, nclass=100)
-    }
+      sq[i] <- sq.func(X=X, var=v, nclass=nclass, zeros=zeros)
   }  
   
   minsq<-min(sq)
-  for (i in 1:length.na(aseq)){
-    for (j in 1:length.na(vseq)){
-      if (sq[i,j]==minsq){
-        minv<-j
-        mina<-i
-      }
-    }
+  for (i in 1:length(var.seq)){
+      if (sq[i]==minsq)  min.v<-i
   }
-  v<-vseq[minv]
-  a<-aseq[mina]
-
-  if(pout){
-    hst<-hist(log(v*a/MSB),freq=F, plot=F)
-    x<-exp(hst$mids)
-    fx<-dchisq(x, v)
-    hst<-hist(log(v*a/MSB),freq=F, ylim=c(0,max(fx,hst$density)))
-    points(hst$mids,fx, type="p", pch=16)
-
-  }
-
-  list(v=v, a=a)
+  var.seq[min.v]
 }
 
-sq2.func <- function(va=c(v,a))
-  { 
-      sq.func(va[1], va[2], MSB=MSB, nclass=100)
-  }
+sq.func<-function(X,var,nclass=NULL, zeros=T){
 
-va2.func <- function(MSB, vstart=list(v0=NULL, vn=100, vstep=0.1), astart=list(a0=NULL, an=100, astep=0.001)){
+    if (is.null(nclass)) index<-1:length(X) else index <- seq(1, length(X), round(length(X)/nclass))
+    hst<-hist(X[index], plot=FALSE, freq=F, nclass=20)
 
-  if(is.null(vstart$v0) | is.null(astart$a0)){
-    Sbar<-mean.na(MSB)
-    Sbar2<-mean.na(MSB)**2
-    S2bar<-mean.na(MSB**2)
-  
-    if(is.null(vstart$v0)){
-      ## estimate using MOM
-      vstart$v0<-(4*S2bar-2*Sbar2)/(S2bar-Sbar2)
-    }
-    
-    if(is.null(astart$a0)){
-      ## estimate using MOM
-      astart$a0<-S2bar*Sbar/(2*S2bar-Sbar2)
-    }
-  }
-  tmp<-nlm(sq2.func, p=c(vstart$v0, astart$a0), stepmax=max(vstart$vn,astart$an), steptol=min(vstart$vstep, astart$astep))
-  list(v=tmp$estimate[1], a=tmp$estimate[2])
+    if (zeros) sumindex<-(1:length(hst$counts)) else sumindex<-(1:length(hst$counts))[hst$density > 0]
+
+    theo<-dnorm(hst$mids[sumindex], mean=0 ,sd=sqrt(var))
+    sum.na((hst$density[sumindex]-theo)**2)
 }
 
-######################################################
-#Lf calculates the (-1)*likelihood of the data as a function of c.
-#This function is not used by any main functions.
 
-lf.func <-function(point){
-c<-point
 
-f1<-gamma((v+nw*nb)/2)/gamma(v/2)
-f2<-pi
-f3<-c/(c+nw*nb)
-f4<-k
-if (k==0){
-	f4<-1
-	SSW<-rep(0, length.na(SSB))
-}
-f5<-v*a
-f6<-v*a+nw*nb*Mbar**2+SSB+k*SSW-(nw*nb*Mbar)**2/(c+nw*nb)
-f7<-v*a+nw*nb*Mbar**2+SSB+k*SSW
 
-fg1<-f1*(f2**(-nw*nb/2))*(f3**(1/2))*(f4**((nw-1)*nb/2))*(f5**(v/2-1))*(f6**(-((v+nw*nb)/2-1)))
-fg2<-f1*(f2**(-nw*nb/2))*(f4**((nw-1)*nb/2))*(f5**(v/2-1))*(f7**(-((v+nw*nb)/2-1)))
-fg<-log(p*fg1+(1-p)*fg2)
-f<-sum.na(fg)
--f
-}
 
-######################################################
-#dc.min and c.min are used to estimate c.
-#If there is no c within (0,1], the result is NULL
-#It is possible to change the range to for example (1,2] when calling c.min.
 
-dc.min<-function(c, para, Xprep)
- {
-  para$c<-c
-  if (is.null(Xprep$SSW)) Xprep$SSW<-rep(0,length.na(Xprep$SSB))
-  l<-stat.bayesian(Xprep=Xprep, para=para)$lods
-  T<-(1:(length.na(Xprep$Mbar)/Xprep$nw))[rank(l)>(length.na(l)-round(length.na(l)*para$p))]
 
-  #Posterior estimates of mean and variance
-  tau<-(Xprep$nb*Xprep$nw*+para$v)/(para$v*para$a+Xprep$nb*Xprep$nw*Xprep$Mbar[T]^2+ Xprep$SSB[T]+ para$k*Xprep$SSW[T]-(Xprep$nb*Xprep$nw*Xprep$Mbar[T])^2/(Xprep$nb*Xprep$nw+c))
-  mu2<-(Xprep$nb*Xprep$nw*Xprep$Mbar[T]/(Xprep$nb*Xprep$nw+c))^2-1/c/tau+1/tau/(Xprep$nb*Xprep$nw+c)
 
-  sum.na(mu2*c*tau)/length.na(T)-1
 
-}
 
-c.min<-function(u=10^(-7),l=1, para, Xprep, ndigit=5)
- {
- if (dc.min(u,para=para,Xprep=Xprep) * dc.min(l,para=para,Xprep=Xprep) <0){
-  if (abs(u-l)> 10^(-ndigit))
-  {
-    new<-0.5*(u+l)
-	
-    if (dc.min(u,para=para,Xprep=Xprep) * dc.min(new,para=para,Xprep=Xprep) <0 )	c.min(u=u, l=new, para=para, Xprep=Xprep)
-    else  c.min(u=new, l=l, para=para, Xprep=Xprep)
-  }	   
-  else round(0.5*(u+l),digits=ndigit)
- }
- }
+
+

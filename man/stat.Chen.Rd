@@ -9,7 +9,7 @@ Applies Chens single slide method.
 
 
 \usage{
-stat.Chen(RG,layout,image.id=1,norm="p",pout=T)
+stat.Chen(RG,layout,norm="p",image.id=1,pout=T)
 }
 
 \arguments{

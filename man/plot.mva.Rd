@@ -22,7 +22,7 @@ respectively.
 \usage{
 plot.mva(RG, layout, norm="p", pout=T, image.id=1, extra.type="tci",
 crit1=0.025,crit2=crit1, nclass=10, labs=NULL, plot.type="n",
-col.ex=NULL, ...) 
+col.ex=NULL,pch=".", ...) 
 }
 
 \arguments{

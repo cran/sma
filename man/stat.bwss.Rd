@@ -34,13 +34,13 @@ List containing the following components
   \item{BSS}{between group sum of squares for each row of \code{X};}
   \item{WSS}{within group sum of squares for each row of \code{X};}
   \item{TSS}{total sum of squares for each row of \code{X};}
-  \item{tvar}{variance for each row of \code{X}.
+  \item{tvar}{variance for each row of \code{X}.}
 }
 
 \references{S. Dudoit, J. Fridlyand, and T. P. Speed. Comparison of
 Discrimination Methods for the Classification of Tumors Using Gene
 Expression Data. June 2000. (Statistics, UC Berkeley,  Tech Report \#
-576). } 
+576). }
 
 \author{
   Sandrine Dudoit, \email{sandrine@stat.berkeley.edu}  \cr

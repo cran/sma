@@ -10,7 +10,7 @@ Applies Sapirs and Churchills single slide method.
 
 
 \usage{
-stat.ChurSap(RG,layout,pp=0.95,norm="p", pout=T, image.id=1)
+stat.ChurSap(RG,layout,pp=0.95,norm="p", pout=T, image.id=1,...)
 
 }
 

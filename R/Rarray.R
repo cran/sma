@@ -149,7 +149,7 @@ stat.gnames<-function(x, gnames, crit=0.05)
 # }
 # 
 # \usage{
-# stat.ma(RG, layout, norm="p", pout=F, ...)
+# stat.ma(RG, layout, norm="p", pout=FALSE, ...)
 # }
 # 
 # \arguments{
@@ -177,11 +177,12 @@ stat.gnames<-function(x, gnames, crit=0.05)
 #     normalization; "p" print-tip group lowess normalization and "s"
 #     scaled print-tip group lowess normalization. The default method is
 #     set to print-tip normalization.}
-#   
-#   \item{pout}{if TRUE, an M vs. A plot will be produced.  Otherwise,
+#
+#   \item{pout}{if TRUE, an M vs. A plot will be produced. Otherwise,
 #   a matrix of log intensity ratios and average log intensities is
-#   returned. } 
-#   
+#   return.  By default pout is set to FALSE.  The option pout='TURE'
+#   is not yet implemented.}
+#
 #   \item{\dots}{other parameters used in \code{\link{ma.func}}. }
 # }
 # 
@@ -192,7 +193,8 @@ stat.gnames<-function(x, gnames, crit=0.05)
 #   \item{A}{Matrix of average log intensities \eqn{A = log_2
 #       \sqrt{RG}}{A = log_2(R*G)/2}}
 #   For the matrix in each of the components, rows correspond to genes
-#   and columns correspond to different hybridizations, that is different slides. 
+#   and columns correspond to different hybridizations, that is
+#   different slides.  
 # }
 # 
 # \references{S. Dudoit, Y. H. Yang, M. J. Callow, and T. P. Speed. Statistical
@@ -221,7 +223,7 @@ stat.gnames<-function(x, gnames, crit=0.05)
 # \keyword{microarray, log ratio.}
 #*/#########################################################################
 
-stat.ma <- function(RG, layout, norm="p", pout=FALSE,...)
+stat.ma <- function(RG, layout, norm="p", pout=FALSE, ...)
 {
   n <- ncol(RG$R)
   res <- list(A=NULL, M=NULL)
@@ -234,7 +236,9 @@ stat.ma <- function(RG, layout, norm="p", pout=FALSE,...)
       }
       if(is.null(RG$G[,i])){
 	stop(" Error: No data is given in RG$G\n")
-      } 
+      }
+      if(pout)
+        stop("pout=TRUE is not implemented")
       tmp <-ma.func(R=RG$R[,i],G=RG$G[,i],Rb=RG$Rb[,i], Gb=RG$Gb[,i], layout=layout, norm=norm, pout=pout, ...)
       res$A<-cbind(res$A, tmp$A)
       res$M<-cbind(res$M, tmp$M)

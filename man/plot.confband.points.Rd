@@ -17,7 +17,7 @@
 }
 
 \usage{
-plot.confband.points(A, M, crit1=0.025, crit2=crit1, nclass=10, ...)
+plot.confband.points(A, M, crit1=0.025, crit2=crit1, nclass=10,col.ex=NULL, ...)
 }
 
 \arguments{

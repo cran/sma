@@ -314,7 +314,7 @@ function(x, layout=NULL, x.names=NULL, ...)
     if(is.matrix(x))
       xmat <- x
     
-    boxplot(data.frame(xmat),...)
+    boxplot(data.frame(xmat), names=x.names, ...)
   }
 
 

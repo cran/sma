@@ -33,12 +33,11 @@ write.spot(x, imageid, batch="output")
 }
 
 \references{ Spot manual \url{
-  http://www.cmis.csiro.au/iap/Spot/spotmanual.htm}}  
-  }
+  http://www.cmis.csiro.au/iap/Spot/spotmanual.htm}}
 
 \author{ Jessica Mar }
 
-\seealso{ \code{\link{write.table}, \code{\link{init.read.spot}} }
+\seealso{ \code{\link{write.table}}} %, \code{\link{init.read.spot}} }}
 
 \examples{## Setting up the data
 ## library(Spot)

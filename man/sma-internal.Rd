@@ -32,6 +32,10 @@
 \alias{stat.Chen.ma}  
 \alias{stat.Newton.ma}     
 \alias{va2.func}    
+\alias{c.func}
+\alias{c.func.est}
+\alias{lods.func.est}
+\alias{ls.variance}
 
 \title{Internal sma functions}
  
