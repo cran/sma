@@ -69,7 +69,10 @@ mouse.lratio <- stat.ma(mouse.data, mouse.setup)
 plot.confband.lines(mouse.lratio$A, mouse.lratio$M) 
 }
 
-\keyword{microarray, point-wise confidence band.}
+%\keyword{microarray, point-wise confidence band.}
+
+\keyword{aplot}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -69,7 +69,9 @@ plot.confband.points(mouse.lratio$A, mouse.lratio$M)
 ## highlighted on the M vs A plot. 
 }
 
-\keyword{microarray, point-wise confidence band.}
+\keyword{aplot}
+
+%\keyword{microarray, point-wise confidence band.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

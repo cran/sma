@@ -60,7 +60,9 @@ init.addinfo()
 and when loaded appropriately into the user's directory, this example  
 should be executable in its current form. }   
 
-\keyword{microarray, quality information.}
+%\keyword{microarray, quality information.}
+
+\keyword{manip}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

@@ -77,7 +77,9 @@ data(MouseArray)
 stat.Chen(mouse.data,mouse.setup,image.id=3)
 }
 
-\keyword{microarray, Chen}
+\keyword{models}
+
+%\keyword{microarray, Chen}
 
 
 

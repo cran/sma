@@ -66,7 +66,10 @@ stat.gnames(abs(mouse.t2$t), mouse.gnames, crit=0.01)
 stat.gnames(abs(mouse.lratio$M[, 1]), mouse.gnames, crit=10)
 }
 
-\keyword{microarray.}
+
+\keyword{misc}
+
+%\keyword{microarray.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

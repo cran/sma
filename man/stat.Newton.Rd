@@ -75,4 +75,5 @@ data(MouseArray)
 stat.Newton(mouse.data,mouse.setup,image.id=3)
 }
 
-\keyword{microarray, Newton, Single slide}
+\keyword{models}
+

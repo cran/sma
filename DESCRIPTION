@@ -1,6 +1,6 @@
 Package: sma
-Version: 0.5.4
-Date: 2000/11/09
+Version: 0.5.5
+Date: 2001/05/17
 Title: Statistical Microarray Analysis
 Author: Sandrine Dudoit <sandrine@stat.berkeley.edu>
 	 Yee Hwa (Jean) Yang <yeehwa@stat.berkeley.edu>
@@ -10,7 +10,7 @@ Author: Sandrine Dudoit <sandrine@stat.berkeley.edu>
 	 Ingrid Lönnstedt <ingrid@math.uu.se>
 	 Jessica Mar
 Maintainer: Yee Hwa (Jean) Yang and Benjamin Milo BOLSTAD <zarray@stat.Berkeley.EDU>
-Depends: R (>=0.90)
+Depends: R (>= 0.90)
 Description:  The package contains some simple functions for
 	      exploratory microarray analysis.  
 License: GPL version 2 or newer

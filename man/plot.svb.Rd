@@ -59,7 +59,9 @@ plot.svb(mouse.data, "green", 3)
 ## for the green channel, using data collected from the third slide. 
 }
 
-\keyword{microarray, background}
+\keyword{hplot}
+
+%\keyword{microarray, background}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

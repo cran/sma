@@ -56,7 +56,10 @@ q <- quantile(rnorm(1000))
 plot.qqline(q, mouse.t2$t)
 }    
 
-\keyword{Q-Q plots, quartiles}
+
+\keywords{aplot}
+
+%\keyword{Q-Q plots, quartiles}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

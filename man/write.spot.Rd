@@ -61,7 +61,8 @@ write.spot(x, imageid, batch="output")
 ## write.spot(mouse.array, 1, "mouse")
 }
 
-\keyword{microarray, Spot, Genepix.} 
+\keyword{file}
+%\keyword{microarray, Spot, Genepix.} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

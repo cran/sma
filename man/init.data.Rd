@@ -62,7 +62,8 @@ None.
 ## Finished creating new dataset.
 }
 
-\keyword{microarray.}
+\keyword{attribute}
+%\keyword{microarray.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

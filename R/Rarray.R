@@ -3,9 +3,10 @@
 # Exploratory analysis - Mainly preprocessing.
 #
 # Date : August 9, 2000
-# Last update : March 19, 2001
+# Last update : May 17, 2001
 #
 # History:
+#   May 17, 2001: Fix to norm.scale.func
 #   March, 19: Splitting Rarray in to smaller files.  
 #              Including Comments at the start of each function.
 #   Nov, 20: Change the argument on plot.mva...it's not usable otherwise.
@@ -392,7 +393,7 @@ stop(" Error: Length of vector different from total number of spots and vector h
       if ((length(as.vector(x)) != n) & (!is.null(x.names)))
         {
           y <- x; x <- rep(NA, n);
-          x[as.integer(s.names)] <- y
+          x[as.integer(x.names)] <- y
         }
       xmat <- matrix(x, nrow = nperpin)
       vect <- TRUE

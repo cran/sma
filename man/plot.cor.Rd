@@ -54,8 +54,9 @@ plot.cor(X, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
 \code{\link{rgb}}.} 
 
 
-\keyword{Microarray, correlation matrix, image.}
+%\keyword{Microarray, correlation matrix, image.}
 
+\keyword{hplot}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

@@ -91,12 +91,15 @@ data(MouseArray)
 
 #My changes
 ## my.para<-mouse.bayesian$para
-## my.para$p<-0.05
+## my.para$p<-0.005
 ## plot.bayesian(Xprep=mouse.bayesian$Xprep, para=my.para)
 
 }
 
-\keyword{microarray, bayesian, lodsratio}
+\keyword{hplot}
+
+%\keyword{microarray, bayesian, lodsratio}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

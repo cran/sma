@@ -49,7 +49,10 @@ Expression Data. June 2000. (Statistics, UC Berkeley,  Tech Report \#
 
 \seealso{\code{\link{var.na}}, \code{\link{var}}, \code{\link{apply}}.}
 
-\keyword{Microarray, BSS, WSS, sum of squares.}
+
+\keyword{models}
+
+%\keyword{Microarray, BSS, WSS, sum of squares.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

@@ -80,4 +80,5 @@ data(MouseArray)
 stat.ChurSap(mouse.data,mouse.setup,pp=0.95,image.id=3)
 }
 
-\keyword{microarray, Churchill, Sapir}
+%\keyword{microarray, Churchill, Sapir}
+\keyword{models}

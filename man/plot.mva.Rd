@@ -128,8 +128,13 @@ plot.type="n")
 ## plot.mva(mouse.data, mouse.setup, norm="l", 2, extra.type="tci", plot.type="b") 
 }     
 
-\keyword{microarray}
+%\keyword{microarray}
+
+\keyword{hplot}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+

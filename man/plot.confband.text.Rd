@@ -68,7 +68,8 @@ plot.confband.text(mouse.lratio$A, mouse.lratio$M)
   \code{\link{plot.confband.lines}}, \code{\link{plot.confband.points}} .
 }
 
-\keyword{microarray, point-wise confidence band.}
+\keyword{aplot}
+%\keyword{microarray, point-wise confidence band.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

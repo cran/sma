@@ -5,16 +5,12 @@
 # Date : November 21, 2000
 #
 # History:
+#      18 May 2001Merged RBayesian2 changes from Ingrid into RBayesian: bmb
 #
 # Authors: Ingrid Lönnstedt  and Yee Hwa (Jean) Yang.
 # First written by Ingrid Lönnstedt and modify by Jean.
 ##########################################################################
-#This method calculate a lodscore (lods) for each gene in an
-#experiment, using the normalized M-values (output from stat.ma), the
-#number of slides (nb), and the number of replicates for each gene
-#within each slide (nw). If there are j replicates within slides, the
-#vectors of M-values for each slide should be on the form M11, ...,
-#M1j, M21, ...M2j, ..., Mgj, where g is the number of genes. 
+#This method calculate a lodscore (lods) for each gene in an experiment, using the normalized M-values (output from stat.ma), the number of slides (nb), and the number of replicates for each gene within each slide (nw). If there are j replicates within slides, the vectors of M-values for each slide should be on the form M11, ..., M1j, M21, ...M2j, ..., Mgj, where g is the number of genes.
 
 #Xprep 	is a list containing means, sums of squares etc needed for the lods
 #	is produced by setup.bayesian (via stat.bayesian or plot.bayesian)
@@ -45,103 +41,6 @@
 ######################################################
 # Main Program
 ######################################################
-
-######################################################/**
-# \name{stat.bayesian}
-# \alias{stat.bayesian}
-# 
-# \title{Calculates an Odds Ratio of Each Gene in a Multi-slide microarray
-# Experiment}
-# \description{
-# This function takes the normalized expression estimates from a
-# multi-slide microarray experiment (M-values output
-# by stat.ma) and returns an odds ratio for each gene: log( Pr(the gene is
-# differentially expressed) / Pr(the gene is not differentially expressed)
-# ). The parameter estimates of the Bayesian model used, as well as some
-# data structures which are useful when presenting the lodscore
-# graphically are also in the output.}
-# 
-# \usage{
-# stat.bayesian(X=NULL, nb=NULL, nw=1, Xprep=NULL, para=list(p = 0.01,
-# v = NULL, a = NULL, c = NULL, k = NULL)) 
-# }
-# 
-# \arguments{
-#   \item{X}{List containing matrix of (normalized) log expression ratios
-#     \eqn{M = log_2 (R/G)} (E.g. output from stat.ma())}
-#   \item{nb}{Number of slides containing spots for a gene (common for all
-#   genes). Unnecessary argument if nw=1.}
-#   \item{nw}{Number of spots for a gene within each slide (common to all
-#     genes).Default is 1.}
-#   \item{Xprep}{Some data structures useful in graphical
-#     presentation. (This is calculated only if not already supplied as
-#     input. See details!)} 
-#   \item{para}{Estimates of the parameters used in the Bayesian
-#     calculations. (These are calculated only if not
-#     already supplied as input. See details!)}
-# }
-# \details{
-# 
-#   Xprep and para are optional input, but they are always in the
-#   output. If Xprep is supplied as input, X, nb and nw are unnecessary
-#   input. A subset of the parameters in para can be specified in the
-#   input, allowing the function to estimate only the others.
-# 
-#   Xprep is a list containing
-#   
-#   \item{nb}{Number of slides containing spots for a gene (common to all
-#   genes).}
-#   \item{nw}{Number of spots for a gene within each slide 
-#             (common to all genes).}
-#   \item{Mbar}{Overalll means for each gene.}
-#   \item{SSB}{Sum of squares between slides for each gene.}
-#   \item{SSB}{Sum of squares within slides for each gene.}
-# 
-#   para is a list of parameters common to all genes containing
-# 
-#   \item{p}{Probability that a random gene is differentially
-#     expressed. Default is 0.01.
-#   \item{v,a}{Parameters in the prior for the variance. If the observed
-#     variances for the genes are (V), then v and a is such that
-#     (va/V)~Chi2(v).}
-#   \item{c}{Parameter in the prior for the mean expression ratio.}
-#   \item{k}{An approximate ratio of the variances between to within slides,
-#     only needed when both nw>1 and nb>1}
-# 
-# }
-# 
-# \value{
-#   
-#   A list of
-#  
-#   \item{Xprep}{Some data structures useful in graphical
-#     presentation. See details!} 
-#   \item{para}{Estimates of the parameters used in the Bayesian
-#     calculations. See details!}
-#   \item{lods}{The log odds ratio for each gene.}
-# }
-# 
-# 
-# \author{
-#     Ingrid Lönnstedt \email{ingrid@math.uu.se} \cr
-#     Yee Hwa Yang, \email{yeehwa@stat.berkeley.edu} \cr
-# }
-# 
-# \seealso{\code{\link{plot.bayesian}}}
-# 
-# \examples{
-# data(MouseArray)
-# ## mouse.setup <- init.grid() 
-# ## mouse.data <- init.data() ## see \emph{init.data} 
-# ## mouse.lratio <- stat.ma(mouse.data, mouse.setup)
-# 
-# ## mouse.bayesian<-stat.bayesian(X=mouse.lratio)
-# ## plot(mouse.bayesian$Xprep$Mbar, mouse.bayesian$lods)
-# 
-# }
-# 
-# \keyword{microarray, bayesian, lodsratio}
-#*/#####################################################
 
 stat.bayesian <- function(X=NULL, nb=NULL, nw=1, Xprep=NULL, para=list(p=0.01, v = NULL, a=NULL, c = NULL,k=NULL))
   {
@@ -175,106 +74,10 @@ stat.bayesian <- function(X=NULL, nb=NULL, nw=1, Xprep=NULL, para=list(p=0.01, v
      }
 
      if(is.null(para$c)) para$c<-c.min(para=para, Xprep=Xprep)
-
+     if(is.null(para$c)) para$c<-0.7
      lods<-lods.func(Xprep, para)
      list(Xprep=Xprep, lods=lods,para=para)
 }
-
-######################################################/**
-# \name{plot.bayesian}
-# \alias{plot.bayesian}
-# 
-# \title{Plots an Odds Ratio of Each Gene in a Multi-slide microarray
-# Experiment}
-# \description{
-# This function takes the normalized expression estimates from a
-# multi-slide microarray experiment (M-values output
-# by stat.ma) and plots an odds ratio for each gene: log( Pr(the gene is
-# differentially expressed) / Pr(the gene is not differentially expressed)
-# ) vs the gene-specific average M-value. Alternatively, the output of
-# stat.bayesian() can be given as input. The resulting plot is the same,
-# but tedious calculations don't have to be done all over again.}
-# 
-# \usage{
-# plot.bayesian(X=NULL, nb=NULL, nw=1, lods=NULL, Xprep=NULL, para=list(p
-# = 0.01, v = NULL, a = NULL, c = NULL, k = NULL))
-# }
-# 
-# \arguments{
-#   \item{X}{List containing matrix of (normalized) log expression ratios
-#     \eqn{M = log_2 (R/G)} (E.g. output from stat.ma())}
-#   \item{nb}{Number of slides containing spots for a gene (common for all
-#   genes). Unnecessary argument if nw=1.}
-#   \item{nw}{Number of spots for a gene within each slide (common to all
-#     genes).Default is 1.}
-#   \item{lods}{The log odds ratio for each gene. Not necessary input. See
-#     details!} 
-#   \item{Xprep}{Some data structures useful in this graphical
-#     presentation. Not necessary input. See details!} 
-#   \item{para}{Estimates of the parameters used in the Bayesian
-#     calculations. Not necessary input. See details!}
-# }
-# \details{
-# 
-#   lods, Xprep and para are optional input. If Xprep is supplied as
-#   input, then X, nb and nw are unnecessary input. If lods is supplied, para
-#   is unnecessary. A subset of the parameters
-#   in para can be specified in the input, allowing the function to
-#   estimate only the others. 
-# 
-#   Xprep is a list containing
-#   
-#   \item{nb}{Number of slides containing spots for a gene (common to all
-#   genes).}
-#   \item{nw}{Number of spots for a gene within each slide (common to
-#   all genes).} 
-#   \item{Mbar}{Overalll means for each gene.}
-#   \item{SSB}{Sum of squares between slides for each gene.}
-#   \item{SSB}{Sum of squares within slides for each gene.}
-# 
-#   para is a list of parameters common to all genes containing
-# 
-#   \item{p}{Probability that a random gene is differentially
-#     expressed. Default is 0.01.
-#   \item{v,a}{Parameters in the prior for the variance. If the observed
-#     variances for the genes are (V), then v and a is such that
-#     (va/V)~Chi2(v).}
-#   \item{c}{Parameter in the prior for the mean expression ratio.}
-#   \item{k}{An approximate ratio of the variances between to within slides,
-#     only needed when both nw>1 and nb>1}
-# 
-# }
-# 
-# \author{
-#     Ingrid Lönnstedt \email{ingrid@math.uu.se} \cr
-#     Yee Hwa Yang, \email{yeehwa@stat.berkeley.edu} \cr
-# }
-# 
-# \seealso{\code{\link{stat.bayesian}}}
-# 
-# \examples{
-# data(MouseArray)
-# ## mouse.setup <- init.grid() 
-# ## mouse.data <- init.data() ## see \emph{init.data} 
-# ## mouse.lratio <- stat.ma(mouse.data, mouse.setup)
-# 
-# #Alternative 1
-# ## mouse.bayesian<-stat.bayesian(X=mouse.lratio)
-# ## plot.bayesian(Xprep=mouse.bayesian$Xprep, lods=mouse.bayesian$lods)
-# 
-# #Alternative 2
-# ## plot.bayesian(X=mouse.lratio)
-# 
-# #My changes
-# ## my.para<-mouse.bayesian$para
-# ## my.para$p<-0.05
-# ## plot.bayesian(Xprep=mouse.bayesian$Xprep, para=my.para)
-# 
-# }
-# 
-# \keyword{microarray, bayesian, lodsratio}
-#*/#####################################################
- 
 
 plot.bayesian <- function(X=NULL, nb=NULL, nw=1, lods=NULL, Xprep=NULL, para=list(p=0.01, v = NULL, a=NULL, c = NULL,k=NULL))
 
@@ -309,7 +112,7 @@ plot.bayesian <- function(X=NULL, nb=NULL, nw=1, lods=NULL, Xprep=NULL, para=lis
 		else para$k<-median(SSB/(nb-1)/SSW*nb*(nw-1))
 	}
         if(is.null(para$c)) para$c<-c.min(para=para, Xprep=Xprep)
-    
+        if(is.null(para$c)) para$c<-0.7
        lods<-lods.func(Xprep, para)
     }
 
@@ -524,7 +327,7 @@ dc.min<-function(c, para, Xprep)
   para$c<-c
   if (is.null(Xprep$SSW)) Xprep$SSW<-rep(0,length.na(Xprep$SSB))
   l<-stat.bayesian(Xprep=Xprep, para=para)$lods
-  T<-(1:(nrow(X$M)/Xprep$nw))[rank(l)>(length.na(l)-round(length.na(l)*para$p))]
+  T<-(1:(length.na(Xprep$Mbar)/Xprep$nw))[rank(l)>(length.na(l)-round(length.na(l)*para$p))]
 
   #Posterior estimates of mean and variance
   tau<-(Xprep$nb*Xprep$nw*+para$v)/(para$v*para$a+Xprep$nb*Xprep$nw*Xprep$Mbar[T]^2+ Xprep$SSB[T]+ para$k*Xprep$SSW[T]-(Xprep$nb*Xprep$nw*Xprep$Mbar[T])^2/(Xprep$nb*Xprep$nw+c))

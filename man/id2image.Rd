@@ -61,7 +61,10 @@ image2id(c(2,4,6,8), mouse.setup)
 ## column 4 is the 2906th gene of the data set.  
 }
 
-\keyword{image, id}
+
+\keyword{attribute}
+%\keyword{image, id}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -51,7 +51,9 @@ Expression Data. June 2000. (Statistics, UC Berkeley, Tech Report \#576).}
 
 %\seealso{ ~~objects to SEE ALSO as \code{\link{~~fun~~}}, ~~~ }
 
-\keyword{Microarray, discriminant analysis, maximum likelihood, classification.}
+\keyword{models}
+
+%\keyword{Microarray, discriminant analysis, maximum likelihood, classification.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

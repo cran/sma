@@ -5,6 +5,7 @@
 # Date : March 19, 2001
 #
 # History:
+#    May 17, 2001: Incorporate postscript fix from kadowaki@pharmadesign.co.jp
 #    March 19, 2001: Some of the plot functions from Rarray.R.
 #					
 #
@@ -206,7 +207,8 @@ plot.mva <- function(RG, layout, norm="p", pout=T, image.id=1, extra.type="tci",
 plot.smooth.line  <- function(A, M, f = 0.1, ...)
 {
         ind <- !(is.na(A) | is.na(M) | is.infinite(A) | is.infinite(M))
-        lines(lowess(A[ind], M[ind], f = f), ...)
+        #lines(lowess(A[ind], M[ind], f = f), ...)
+        lines(approx(lowess(A[ind], M[ind], f = f)), ...)  
 }
 
 ########################################################################/**

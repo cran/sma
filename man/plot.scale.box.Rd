@@ -45,7 +45,9 @@ plot.scale.box(x, layout, x.names=NULL, ...)
      ## Producing boxplots for different slides.
      plot.scale.box(mouse.lratio$M)
 }
-\keyword{boxplots, microarray}
+
+\keyword{hplot}
+%\keyword{boxplots, microarray}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

@@ -67,7 +67,9 @@ mouse.lratio <- stat.ma(mouse.data, mouse.setup)
 plot.mat(spatial.func(mouse.lratio$M[,1], mouse.setup))
 }
 
-\keyword{Microarray, image of data matrix.} 
+\keyword{hplot}
+
+%\keyword{Microarray, image of data matrix.} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -68,7 +68,8 @@ init.show.exp("batch")
 ## 2        m2    ~/path/image2.data
 }
 
-\keyword{filename}
+\keyword{attribute}
+%\keyword{filename}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

@@ -50,7 +50,8 @@ mouse.lratio <- stat.ma(mouse.data, mouse.setup)
 mouse.norm.lratio <- stat.norm.exp(mouse.lratio$M)
 }
 
-\keyword{microarray, log ratio, normalization.}
+\keyword{manip}
+%\keyword{microarray, log ratio, normalization.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

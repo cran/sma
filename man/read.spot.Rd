@@ -57,7 +57,8 @@ in the file.
 ## mouse1 <- read.spot("mouse.1.spot")
 }
 
-\keyword{microarray, Spot, GenePix.}
+\keyword{file}
+%\keyword{microarray, Spot, GenePix.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

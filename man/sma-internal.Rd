@@ -39,4 +39,4 @@
  
 \details{These are not to be called by the user.}
 
-\keyword{Internal functions.}
+\keyword{methods}

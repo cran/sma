@@ -98,7 +98,9 @@ data(MouseArray)
 
 }
 
-\keyword{microarray, bayesian, lodsratio}
+\keyword{models}
+
+%\keyword{microarray, bayesian, lodsratio}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

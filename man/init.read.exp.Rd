@@ -52,7 +52,7 @@ init.read.exp(batch, imageid, sep="\t", header=T, ...)}
 and when loaded appropriately into the user's directory, this
 example should be executable in its current form.} 
 
-\keyword{measurements, statistics}
+\keyword{file}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

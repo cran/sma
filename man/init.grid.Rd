@@ -62,7 +62,8 @@ data(MouseArray)
 # Initialization complete
 }
 
-\keyword{microarray, grid.}
+\keyword{misc}
+%\keyword{microarray, grid.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

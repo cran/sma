@@ -60,7 +60,9 @@ plot.mva(mouse.data, mouse.setup)
 plot.smooth.line(mouse.lratio$A, mouse.lratio$M)
 }
 
-\keyword{microarray, lowess.}
+\keyword{aplot}
+
+%\keyword{microarray, lowess.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

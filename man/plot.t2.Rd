@@ -58,7 +58,9 @@ data(MouseArray)
 plot.t2(mouse.t2, "Mouse")
 }    
 
-\keyword{microarray, ttest.}
+%\keyword{microarray, ttest.}
+
+\keyword{hplot}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

@@ -51,7 +51,9 @@ rgcolors.func(n=5)
 ## "#00FF00" "#40BF00" "#808000" "#BF4000" "#FF0000"
 }
 
-\keyword{Microarray, RGB image.}
+
+\keyword{color}
+%\keyword{Microarray, RGB image.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

@@ -66,7 +66,8 @@ data(MouseArray)
 plot.qq(mouse.t2$t, "Mouse")
 }     
 
-\keyword{microarray, histogram, qqplot.}
+\keyword{hplot}
+%\keyword{microarray, histogram, qqplot.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

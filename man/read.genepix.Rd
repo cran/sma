@@ -54,7 +54,10 @@ in the file.
 \seealso{\code{\link{read.table}}, \code{\link{data.frame}},
 \code{\link{read.spot}}.} 
 
-\keyword{microarray, GenePix.}
+%\keyword{microarray, GenePix.}
+
+\keyword{file}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File

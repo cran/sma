@@ -95,7 +95,8 @@ data(MouseArray)
 mouse.lratio <- stat.ma(mouse.data, mouse.setup)
 }
 
-\keyword{microarray, log ratio.}
+\keyword{manip}
+%\keyword{microarray, log ratio.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
