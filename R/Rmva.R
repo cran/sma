@@ -140,7 +140,7 @@
 # 
 #*/########################################################################
 
-plot.mva <- function(x, layout, norm="p", pout=T, image.id=1, extra.type="tci", crit1=0.025,crit2=crit1, nclass=10, labs=NULL, plot.type="n", col.ex=NULL, pch=".", ...)
+plot.mva <- function(x, layout, norm="p", pout=TRUE, image.id=1, extra.type="tci", crit1=0.025,crit2=crit1, nclass=10, labs=NULL, plot.type="n", col.ex=NULL, pch=".", ...)
 {
 #  RG <- x
   ma.func(R = x$R[,image.id], G=x$G[,image.id], Rb=x$Rb[,image.id], Gb = x$Gb[,image.id], layout=layout, norm=norm, pout=pout, extra.type=extra.type, crit1=crit1, crit2=crit2, nclass=nclass, labs=labs, plot.type=plot.type, col.ex=col.ex, pch=pch,...)
@@ -287,7 +287,7 @@ plot.confband.lines<-function (x, M, crit1=0.025, crit2=crit1, nclass=10, ...)
   if (crit1 >= 1) crit1 <- crit1 / length.na(M)
   if (crit2 >= 1) crit2 <- crit2 / length.na(M)
   cutoff<-NULL
-  Abin <- quantile(x, probs=seq(0, nclass, 1)/nclass, na.rm=T)
+  Abin <- quantile(x, probs=seq(0, nclass, 1)/nclass, na.rm=TRUE)
   for(i in (1:nclass) ){
     tmpind<-(Abin[i]<=x)&(x<Abin[i+1])
     xtmp <- M
@@ -377,7 +377,7 @@ plot.confband.points<-function (x, M, crit1=0.025, crit2=crit1, nclass=10, col.e
   if (crit1 >= 1) crit1 <- crit1 / length.na(M)
   if (crit2 >= 1) crit2 <- crit2 / length.na(M)  
   txtA<-(rep(FALSE,length(x)))
-  Abin <- quantile(x, probs=seq(0, nclass, 1)/nclass, na.rm=T)
+  Abin <- quantile(x, probs=seq(0, nclass, 1)/nclass, na.rm=TRUE)
   for(i in 1:nclass){
     tmpind<-(Abin[i]<=x)&(x<Abin[i+1])
     xtmp <- M
@@ -460,7 +460,7 @@ plot.confband.points<-function (x, M, crit1=0.025, crit2=crit1, nclass=10, col.e
  
 
  plot.confband.text <- 
-function (x, M, crit1=0.025, crit2=crit1, nclass=10, labs=NULL, output=F, ...) 
+function (x, M, crit1=0.025, crit2=crit1, nclass=10, labs=NULL, output=FALSE, ...) 
 {
 #  A <- x
   if (crit1 >= 1) crit1 <- crit1 / length.na(M)

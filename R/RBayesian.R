@@ -250,7 +250,7 @@ c.func<-function(Xprep, para){
   start<-var.est/10
   end<-var.est*10
   
-  csigma2<-ls.variance(X=Xprep$Mbar[top.set], var.start=start, var.stop=end, zeros=F)
+  csigma2<-ls.variance(X=Xprep$Mbar[top.set], var.start=start, var.stop=end, zeros=FALSE)
   
   csigma2/sigma2
 }
@@ -277,13 +277,13 @@ c.func.est<-function(Xprep, para){
   start<-var.est/10
   end<-var.est*10
   
-  csigma2<-ls.variance(X=Xprep$Mbar[top.set], var.start=start, var.stop=end, zeros=F)
+  csigma2<-ls.variance(X=Xprep$Mbar[top.set], var.start=start, var.stop=end, zeros=FALSE)
   
   csigma2/sigma2
 }
 
 
-ls.variance<-function(X, var.start, var.stop, var.steps=100, nclass=NULL, zeros=T) {
+ls.variance<-function(X, var.start, var.stop, var.steps=100, nclass=NULL, zeros=TRUE) {
 
   var.seq<-seq(var.start, var.stop, (var.stop-var.start)/var.steps)
   sq<-rep(0,length(var.seq))
@@ -300,10 +300,10 @@ ls.variance<-function(X, var.start, var.stop, var.steps=100, nclass=NULL, zeros=
   var.seq[min.v]
 }
 
-sq.func<-function(X,var,nclass=NULL, zeros=T){
+sq.func<-function(X,var,nclass=NULL, zeros=TRUE){
 
     if (is.null(nclass)) index<-1:length(X) else index <- seq(1, length(X), round(length(X)/nclass))
-    hst<-hist(X[index], plot=FALSE, freq=F, nclass=20)
+    hst<-hist(X[index], plot=FALSE, freq=FALSE, nclass=20)
 
     if (zeros) sumindex<-(1:length(hst$counts)) else sumindex<-(1:length(hst$counts))[hst$density > 0]
 

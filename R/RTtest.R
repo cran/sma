@@ -29,7 +29,7 @@
 # }
 # 
 # \usage{
-# stat.t2(X, cl, x.ratio=F, var.equal=T, ...)
+# stat.t2(X, cl, x.ratio=FALSE, var.equal=TRUE, ...)
 # }
 # 
 # \arguments{
@@ -106,7 +106,7 @@
 # \keyword{T-test.}
 #*/#########################################################################
 
-stat.t2<-function(X, cl, x.ratio=F, var.equal=T,  ...)
+stat.t2<-function(X, cl, x.ratio=FALSE, var.equal=TRUE,  ...)
 { 
   if(!x.ratio){
     n <- ncol(X)/2
@@ -126,7 +126,7 @@ stat.t2<-function(X, cl, x.ratio=F, var.equal=T,  ...)
 # Internal Function called by stat.t2
 ##########################################################################
 
-t2stat.func<-function(x,cl,var.equal=T, ...)
+t2stat.func<-function(x,cl,var.equal=TRUE, ...)
 {
   x.ok<-x[!(is.na(x) | is.infinite(x))]
   cl.ok<-cl[!(is.na(x)| is.infinite(x))]

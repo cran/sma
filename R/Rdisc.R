@@ -91,7 +91,7 @@ rgcolors.func<-function(n = 50)
 # }
 # 
 # \usage{
-# plot.cor(X, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
+# plot.cor(X, new=F, nrgcols=50, labels=FALSE, labcols=1, title="", ...)
 # }
 # 
 # \arguments{
@@ -130,7 +130,7 @@ rgcolors.func<-function(n = 50)
 # 
 #*/#######################################################################
 
- plot.cor<-function(x, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
+ plot.cor<-function(x, new=FALSE, nrgcols=50, labels=FALSE, labcols=1, title="", ...)
  {
 #   X <- x
    n<-ncol(x)
@@ -173,7 +173,7 @@ rgcolors.func<-function(n = 50)
 # }
 # 
 # \usage{
-# plot.mat(X, nrgcols=50, rlabels=F, clabels=F, rcols=1, ccols=1, title="",...)
+# plot.mat(X, nrgcols=50, rlabels=FALSE, clabels=FALSE, rcols=1, ccols=1, title="",...)
 # }
 # 
 # %- maybe also `usage' for other objects documented here.
@@ -227,7 +227,7 @@ rgcolors.func<-function(n = 50)
 # 
 #*/#######################################################################
 
-plot.mat<-function(x, nrgcols=50, rlabels=F, clabels=F, rcols=1, ccols=1, title="", ...)
+plot.mat<-function(x, nrgcols=50, rlabels=FALSE, clabels=FALSE, rcols=1, ccols=1, title="", ...)
 {
 #  X <-x
   n<-nrow(x)

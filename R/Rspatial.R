@@ -126,7 +126,7 @@ spatial.func <- function(fullm, layout)
   gc <- layout$ngrid.c; gr <- layout$ngrid.r
   sc <- layout$nspot.c; sr <- layout$nspot.r
   grid <- split(fullm, rep(1:(gc*gr) , rep(sc*sr, gc*gr)))
-  grid1 <- lapply(grid, matrix, nrow=sr, ncol=sc, byrow=T)
+  grid1 <- lapply(grid, matrix, nrow=sr, ncol=sc, byrow=TRUE)
   grid2 <- split(unlist(grid1), rep(1:gr, rep(sc*sr*gc, gr)))
   grid3 <- lapply(grid2, matrix, nrow=sr)
   full <- NULL
@@ -135,7 +135,7 @@ spatial.func <- function(fullm, layout)
   full
 }
 
-draw.image.func <- function (x, layout, axes = F, array.grid = T, label = F, ...) 
+draw.image.func <- function (x, layout, axes = FALSE, array.grid = TRUE, label = FALSE, ...) 
 {
     gc <- layout$ngrid.c
     gr <- layout$ngrid.r

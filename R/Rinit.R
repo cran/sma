@@ -91,7 +91,7 @@ write.spot <- function(x, imageid, batch="output")
       {
         stop("Warning: imageid must be a number or a character")
       } 
-    write.table(x, newname, quote=F, sep="\t", row.names=F, col.names=T)
+    write.table(x, newname, quote=FALSE, sep="\t", row.names=FALSE, col.names=TRUE)
   }
 
 ########################################################################/**
@@ -151,7 +151,7 @@ write.spot <- function(x, imageid, batch="output")
 # 
 #*/#####################################################################
 
-read.spot <- function(name, dir=".", sep="\t", header=T,  ...)
+read.spot <- function(name, dir=".", sep="\t", header=TRUE,  ...)
   {
     newname <- paste(dir, name, sep="/")
     read.table(newname, sep=sep, header=header, ...)
@@ -216,7 +216,7 @@ read.spot <- function(name, dir=".", sep="\t", header=T,  ...)
 # 
 #*/#####################################################################
  
-read.genepix <- function (name, dir = ".", sep = "\t", header = T, skip=26, ...) 
+read.genepix <- function (name, dir = ".", sep = "\t", header = TRUE, skip=26, ...) 
 {
     newname <- paste(dir, name, sep = "/")
     gpname <- c("Block", "Col", "Row", "Name", "ID", "X","Y", "Dia", "Rmed", "Rmean", "RSD", "Rbmed", "Rbmean", "RbSD", "Rb1SD", "Rb2SD", "Rbsat","Gmed", "Gmean", "GSD", "Gbmed", "Gbmean", "GbSD", "Gb1SD", "Gb2SD", "Gbsat", "ratiomed", "ratiomean", "medratio", "meanratio", "ratiosd", "Rratio", "RegR2", "FPixels", "BPixels", "summed", "summean", "logratio", "Rmedc", "Gmedc", "Rmeanc", "Gmedc", "flags")
@@ -560,7 +560,7 @@ init.addinfo <- function(batch, attri, dataname=NULL, ...)
 # \keyword{measurements, statistics}
 #*/#########################################################################
 
-init.read.exp <- function(batch, imageid, sep="\t", header=T, ...)
+init.read.exp <- function(batch, imageid, sep="\t", header=TRUE, ...)
   {
     tmp<-init.show.exp(batch)
     res<-read.table(tmp[imageid,2], sep=sep, header=header, ...)
@@ -643,7 +643,7 @@ init.show.exp <- function(batch)
     if (!file.exists(file)){
         stop(paste("File \"", file, "\" does not exist. \n", sep = ""))
 	}
-    expt <- read.table(file, header = T, as.is = T)
+    expt <- read.table(file, header = TRUE, as.is = TRUE)
     if (ncol(expt) != 2){
         stop(paste("Should be two columns in experiment name file \"",
             file, "\". \n", sep = ""))
@@ -652,7 +652,7 @@ init.show.exp <- function(batch)
     expt
 }
 
-init.name.exp <-function(Robject=F)
+init.name.exp <-function(Robject=FALSE)
 {
   ## This file creates the file containing file sources and corresponding 
   ## R names for a batch of experiments
@@ -694,12 +694,12 @@ init.name.exp <-function(Robject=F)
   if(new.n =="n")
     {
       res <- cbind(dname,pname)
-      write.table(res, paste(oname, "exp", sep="."),sep="\t", row.names = F, col.names = T, quote = F)
+      write.table(res, paste(oname, "exp", sep="."),sep="\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
     }
   if(new.n =="a")
     {
       res <-rbind(as.matrix(init.readexp(oname)), cbind(dname,pname))
-      write.table(res, paste(oname, "exp", sep="."),sep="\t", row.names = F, col.names = T, quote = F)
+      write.table(res, paste(oname, "exp", sep="."),sep="\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
     }
   cat("Finished adding names to .exp file.\n")
   if(!Robject) res <-  NULL

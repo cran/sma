@@ -96,13 +96,13 @@ stat.gnames<-function(x, gnames, crit=0.05)
     ind <- is.infinite(x)
     x <- x[!ind]
     if (crit < 1) {
-        which <- rev(order.na(x, na.last = F))[1:(round(length(x) * 
+        which <- rev(order.na(x, na.last = FALSE))[1:(round(length(x) * 
             crit))]
         if (sum(is.na(x)) > (length(x) - round(length(x) * crit))) 
             warning("NA exists under your selection criteria")
     }
     if (crit >= 1) {
-        which <- rev(order.na(x, na.last = F))[1:crit]
+        which <- rev(order.na(x, na.last = FALSE))[1:crit]
         if (sum(is.na(x)) > (length(x) - crit)) 
             warning("NA exists under your selection criteria")
     }
@@ -306,7 +306,7 @@ stat.norm.exp <- function(X)
   {
     n <- ncol(X)
     
-    xmat.mad <- apply(X, 2, mad, na.rm=T)
+    xmat.mad <- apply(X, 2, mad, na.rm=TRUE)
     
     denom <- (prod.na(xmat.mad))^(1/n)
     si <- xmat.mad / denom
@@ -346,7 +346,7 @@ ma.func <- function (R, G, Rb, Gb, layout, norm = "p", pout, f = 0.3, extra.type
   if (norm == "n")
     M <- oM
   if (norm == "m")
-    M <- oM - median(oM, na.rm = T)
+    M <- oM - median(oM, na.rm = TRUE)
   if (norm == "l")
     M <- norm.l.func(oA, oM, f = f)
   if (norm == "p")
@@ -357,7 +357,7 @@ ma.func <- function (R, G, Rb, Gb, layout, norm = "p", pout, f = 0.3, extra.type
   }
   if (pout){
     if(is.null(labs)) labs <- as.character(1:length(M))
-    if(plot.type=="b") par(ask=T) else par(ask=F)
+    if(plot.type=="b") par(ask=TRUE) else par(ask=FALSE)
     if( ((plot.type == "b") | (plot.type == "r")) ){
 ##      par(mfrow = c(2, 1))
       plot(oA, oM, xlab = "A", ylab = "M", pch=pch, ...)
@@ -377,7 +377,7 @@ ma.func <- function (R, G, Rb, Gb, layout, norm = "p", pout, f = 0.3, extra.type
       if(extra.type== "lci") plot.confband.lines(A,M,crit1,crit2,nclass,col=col.ex,...)
       plot.smooth.line(A, M, f = 0.3)
     }
-    par(ask=F)
+    par(ask=FALSE)
 ##    par(mfrow = c(1, 1))
   }
   else{ list(M = M, A = A) }
@@ -408,7 +408,7 @@ stop(" Error: Length of vector different from total number of spots and vector h
       vect <- FALSE
                     }
     
-    xmat.mad <- apply(xmat, 2, mad, na.rm=T)
+    xmat.mad <- apply(xmat, 2, mad, na.rm=TRUE)
     sigma2 <- (1/nperpin) * exp((1/npin)*sum.na(log(xmat.mad)))
     si <- xmat.mad / (sigma2 * nperpin)
     xmat.s <- t(t(xmat) / si)

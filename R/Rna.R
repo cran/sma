@@ -109,7 +109,7 @@ quantile.na <- function(x, ...)
    quantile(x[tmp],...)
  }
    
-order.na <- function (x, na.last = T) 
+order.na <- function (x, na.last = TRUE) 
 {
     y <- order(x)
     n <- sum(is.na(x))

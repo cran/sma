@@ -141,7 +141,7 @@ chur.em.func <- function(e,theta=c(0.5,1),maxits=50,a=0,b=1)
 {
   p <- theta[1]
   s2 <- var(e)
-  notdone <- T
+  notdone <- TRUE
   iter <- 1
   while (notdone)
     {
@@ -217,9 +217,9 @@ givelim <-function(pp,p,s,b,a){
 #
 #############################################
 
-stat.ChurSap <- function(RG,layout,pp=0.95,norm="p", pout=T, image.id=1, ...)
+stat.ChurSap <- function(RG,layout,pp=0.95,norm="p", pout=TRUE, image.id=1, ...)
 {
-  MA <-stat.ma(RG, layout, norm, pout=F)
+  MA <-stat.ma(RG, layout, norm, pout=FALSE)
   stat.ChurSap.ma(MA,pp,pout,image.id,...)
 	
 }
@@ -231,7 +231,7 @@ stat.ChurSap <- function(RG,layout,pp=0.95,norm="p", pout=T, image.id=1, ...)
 #
 ################################################
 	
-stat.ChurSap.ma <- function(MA,pp,pout=T, image.id=1,...)
+stat.ChurSap.ma <- function(MA,pp,pout=TRUE, image.id=1,...)
 {
   tmpM <- MA$M[,image.id]
   orthogres <- chur.M.to.e.func(tmpM)
@@ -245,7 +245,7 @@ stat.ChurSap.ma <- function(MA,pp,pout=T, image.id=1,...)
   #print(B)
   em<-chur.em.func(orthogres,a=A,b=B)
 #  limits <-givelim(pp,em$theta[1],em$theta[2],B,A)
-  if (pout==T){
+  if (pout==TRUE){
     plot(MA$A[,image.id],MA$M[,image.id],cex=0.6,xlab="A",ylab="M")
     limits <-givelim(pp,em$theta[1],em$theta[2],B,A)
     abline(limits,0)
@@ -326,7 +326,7 @@ newton.plot.rotate <- function(A, M, theta,...)
 ##  theta <- fits[1,]
   logbf <- lod2(A,M,theta=theta)
   bf <- outer(vec1,vec2,"lod2",theta=theta)
-  bar <- contour(vec1,vec2,bf,levels=c(0,1,2), save=T, plotit=T, add=T,
+  bar <- contour(vec1,vec2,bf,levels=c(0,1,2), save=TRUE, plotit=TRUE, add=TRUE,
 		 labex=0, lwd=2 )
   points( A[logbf >=0], M[logbf>=0], cex=.6 , col=2,...)
   points( A[logbf < 0], M[logbf< 0], cex=.6 , col=3,...)
@@ -455,7 +455,7 @@ func.em <- function(A, M, theta=c(2,1.2,2.7,.4))
 # Beta hyperparameter for p
 pprior <- 2
 # starting value
-notdone <- T
+notdone <- TRUE
 iter <- 1
 x <- 2^(A - M/2)
 y <- 2^(A + M/2)
@@ -544,14 +544,14 @@ theta
 #
 ######################################################################
 
-stat.Newton <- function(RG,layout,norm="p",image.id=1,pout=T){
-	MA <-stat.ma(RG, layout, norm, pout=F)
+stat.Newton <- function(RG,layout,norm="p",image.id=1,pout=TRUE){
+	MA <-stat.ma(RG, layout, norm, pout=FALSE)
 	stat.Newton.ma(MA,image.id,pout)
 
 }
 
 
-stat.Newton.ma <- function(MA,image.id=1,pout=T){
+stat.Newton.ma <- function(MA,image.id=1,pout=TRUE){
 	M <- MA$M[,image.id]
 	A <- MA$A[,image.id]
 
@@ -559,7 +559,7 @@ stat.Newton.ma <- function(MA,image.id=1,pout=T){
 	
 	theta <- func.em(A[!ind],M[!ind])
 
-        if (pout == T){
+        if (pout == TRUE){
           newton.plot.rotate(A,M,theta)
         } else {
           logodds <- rep(NA,length(M))
@@ -598,11 +598,11 @@ nploglikderiv <- function(theta,xx=xx,yy=yy,zz=zz){
 
 
 
-chen.plot.rotate <- function(A, M,pout=T){
+chen.plot.rotate <- function(A, M,pout=TRUE){
   ind <- is.na(A) | is.na(M) | is.infinite(A) | is.infinite(M)
   A <- A[!ind]
   M <- M[!ind]
-  if (pout==T){
+  if (pout==TRUE){
     plot(A, M,cex=0.6,xlab="A", ylab="M")
     chen.func.rotate(A, M, err=0.01, col=4)
     chen.func.rotate(A, M, err=0.05, col=5)
@@ -619,13 +619,13 @@ chen.plot.rotate <- function(A, M,pout=T){
 
 
 
-stat.Chen <- function(RG,layout,norm="p",image.id=1,pout=T){
-  MA <-stat.ma(RG, layout, norm, pout=F)
+stat.Chen <- function(RG,layout,norm="p",image.id=1,pout=TRUE){
+  MA <-stat.ma(RG, layout, norm, pout=FALSE)
   stat.Chen.ma(MA,image.id,pout)
 }
 
 
-stat.Chen.ma <- function(MA,image.id,pout=T){
+stat.Chen.ma <- function(MA,image.id,pout=TRUE){
   chen.plot.rotate(MA$A[,image.id],MA$M[,image.id],pout) 
 }
 
@@ -633,11 +633,11 @@ stat.Chen.ma <- function(MA,image.id,pout=T){
 
 plot.single.slide <- function(x,layout,norm="p",image.id=1,...){
   #RG <- x
-  MA <- stat.ma(x, layout, norm, pout = F)
-  Newton <- stat.Newton.ma(MA,image.id, pout=F)
-  ChurSap <- stat.ChurSap.ma(MA,pp=0.95,pout=F,image.id)
-  ChurSap2 <- stat.ChurSap.ma(MA,pp=0.99,pout=F,image.id)
-  Chen <- stat.Chen.ma(MA,image.id,pout=F)
+  MA <- stat.ma(x, layout, norm, pout = FALSE)
+  Newton <- stat.Newton.ma(MA,image.id, pout=FALSE)
+  ChurSap <- stat.ChurSap.ma(MA,pp=0.95,pout=FALSE,image.id)
+  ChurSap2 <- stat.ChurSap.ma(MA,pp=0.99,pout=FALSE,image.id)
+  Chen <- stat.Chen.ma(MA,image.id,pout=FALSE)
   newton.plot.rotate(MA$A[,image.id],MA$M[,image.id],Newton$theta,...)
   abline(h=Chen$lower01,col=4,lty=2,lwd=2)
   abline(h=Chen$upper01,col=4,lty=2,lwd=2)

@@ -73,24 +73,24 @@
 # \keyword{microarray, background}
 # 
 #*/######################################################################/**
-plot.svb <- function(x, channel="R", image.id=1, S.isbgcor=F, ...)
+plot.svb <- function(x, channel="R", image.id=1, S.isbgcor=FALSE, ...)
    {if(is.list(x))
      if ((channel=="R") | (channel=="r") | (channel=="red"))
-     {svb.func(x$R[, image.id], x$Rb[, image.id], S.isbgcor=F, ...)}
+     {svb.func(x$R[, image.id], x$Rb[, image.id], S.isbgcor=FALSE, ...)}
        
      if ((channel=="G") | (channel=="g") | (channel=="green"))
-     {svb.func(x$G[, image.id], x$Gb[, image.id], S.isbgcor=F, ...)}
+     {svb.func(x$G[, image.id], x$Gb[, image.id], S.isbgcor=FALSE, ...)}
    }
 
-svb.func <- function(Signal, Bg, S.isbgcor = F, ...)
+svb.func <- function(Signal, Bg, S.isbgcor = FALSE, ...)
 {
   if(S.isbgcor){
-    ind <- log.na(Signal, 2) < quantile(log.na(Signal, 2), 0.75,  na.rm=T)
+    ind <- log.na(Signal, 2) < quantile(log.na(Signal, 2), 0.75,  na.rm=TRUE)
     plot(log.na(Bg,2)[ind], log.na(Signal,2)[ind], 
 	 xlab="Background", ylab="Signal", ...)
   }
   if(!S.isbgcor){
-    ind <- log.na(Signal-Bg, 2) < quantile(log.na(Signal-Bg, 2), 0.75,  na.rm=T)
+    ind <- log.na(Signal-Bg, 2) < quantile(log.na(Signal-Bg, 2), 0.75,  na.rm=TRUE)
     plot(log.na(Bg,2)[ind], log.na(Signal-Bg,2)[ind], 
 	 xlab="Background", ylab="Signal", ...)
   }
@@ -110,7 +110,7 @@ plot.print.tip.lowess <- function (x, layout, norm = "n", image.id = 1, palette 
 {
     tmp <- ma.func(R = x$R[, image.id], G = x$G[, image.id], 
         Rb = x$Rb[, image.id], Gb = x$Gb[, image.id], layout, 
-        norm = norm, pout = F, ...)
+        norm = norm, pout = FALSE, ...)
     plot(tmp$A, tmp$M, xlab = "A", ylab = "M", ...)
     npin <- layout$ngrid.r * layout$ngrid.c
     nspot <- layout$nspot.c * layout$nspot.r
@@ -203,7 +203,7 @@ plot.qq <- function(x,name, low=-5, high=5,...)
 {
   par(mfrow=c(2,1))
   hist(x,xlab="t",nclass=100,main=paste(name," Histogram and quantile-quantile plot of t-statistics", sep=":"),col=9,cex=0.8)
-  tmp<-qqnorm(x,plot=F)
+  tmp<-qqnorm(x,plot=FALSE)
   plot(tmp,pch=".",xlab="Quantiles of standard normal",ylab="t")
   points(tmp$x[tmp$y<low],tmp$y[tmp$y<low],pch="*",col=6,cex=1.2)
   points(tmp$x[tmp$y>high],tmp$y[tmp$y>high],pch="*",col=2,cex=1.2)
