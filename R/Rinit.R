@@ -9,7 +9,7 @@
 # History:
 #   March, 19: Insert comments from the help files
 #   Nov, 10: Change data structure from matrix to list of matrix.  
-#
+#   Feb 12, 2003: Fix a bug in init.name.exp  init.readexp -> init.read.exp
 #
 # Authors: Sandrine Dudoit, Yee Hwa (Jean) Yang and Natalie Roberts
 ##########################################################################
@@ -698,7 +698,7 @@ init.name.exp <-function(Robject=FALSE)
     }
   if(new.n =="a")
     {
-      res <-rbind(as.matrix(init.readexp(oname)), cbind(dname,pname))
+      res <-rbind(as.matrix(init.read.exp(oname)), cbind(dname,pname))
       write.table(res, paste(oname, "exp", sep="."),sep="\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
     }
   cat("Finished adding names to .exp file.\n")

@@ -14,6 +14,8 @@
 #   Nov, 13: Ben's Bug fix on stat.ma
 #   Nov, 10: Change data structure from matrix to list of matrix.  
 #   Sept, 28: Bug fix: ma.func
+#   Feb 20, 2003 - bug fix to ma.func (As suggested by G. Smyth)
+#   Apr 27, 2003 - fix bug in ma.func (when both R-Rb and G-Gb are negative should M give NA)
 #
 # Authors: Sandrine Dudoit and Yee Hwa (Jean) Yang.
 ##########################################################################
@@ -341,8 +343,8 @@ ma.func <- function (R, G, Rb, Gb, layout, norm = "p", pout, f = 0.3, extra.type
   else
     cy5 <- R - Rb
 
-  A <- oA <- log.na(cy3 * cy5, 2)/2
-  oM <- log.na(cy5/cy3, 2)
+  A <- oA <- (log.na(cy3,2) +   log.na(cy5, 2))/2   #<- log.na(cy3 * cy5, 2)/2
+  oM <- (log.na(cy5,2) - log.na(cy3,2))    #log.na(cy5/cy3, 2)
   if (norm == "n")
     M <- oM
   if (norm == "m")

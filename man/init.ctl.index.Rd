@@ -31,7 +31,7 @@ init.ctl.index(grows, gcols, srows, scols)
 ## Generates the 4 co-ordinates index to spots in the first 2 rows,
 ## columns 15 to 20 of every print-tips groups.
 }
-\keyword{data}
+\keyword{manip}
 
 \author{Yee Hwa Yang, \email{yeehwa@stat.berkeley.edu}}
 
