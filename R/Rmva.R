@@ -140,9 +140,10 @@
 # 
 #*/########################################################################
 
-plot.mva <- function(RG, layout, norm="p", pout=T, image.id=1, extra.type="tci", crit1=0.025,crit2=crit1, nclass=10, labs=NULL, plot.type="n", col.ex=NULL, pch=".", ...)
+plot.mva <- function(x, layout, norm="p", pout=T, image.id=1, extra.type="tci", crit1=0.025,crit2=crit1, nclass=10, labs=NULL, plot.type="n", col.ex=NULL, pch=".", ...)
 {
-  ma.func(R = RG$R[,image.id], G=RG$G[,image.id], Rb=RG$Rb[,image.id], Gb = RG$Gb[,image.id], layout=layout, norm=norm, pout=pout, extra.type=extra.type, crit1=crit1, crit2=crit2, nclass=nclass, labs=labs, plot.type=plot.type, col.ex=col.ex, pch=pch,...)
+#  RG <- x
+  ma.func(R = x$R[,image.id], G=x$G[,image.id], Rb=x$Rb[,image.id], Gb = x$Gb[,image.id], layout=layout, norm=norm, pout=pout, extra.type=extra.type, crit1=crit1, crit2=crit2, nclass=nclass, labs=labs, plot.type=plot.type, col.ex=col.ex, pch=pch,...)
 }
 
 ########################################################################/**
@@ -204,11 +205,12 @@ plot.mva <- function(RG, layout, norm="p", pout=T, image.id=1, extra.type="tci",
 # \keyword{microarray, lowess.}
 #*/########################################################################
 
-plot.smooth.line  <- function(A, M, f = 0.1, ...)
+plot.smooth.line  <- function(x, M, f = 0.1, ...)
 {
-        ind <- !(is.na(A) | is.na(M) | is.infinite(A) | is.infinite(M))
-        #lines(lowess(A[ind], M[ind], f = f), ...)
-        lines(approx(lowess(A[ind], M[ind], f = f)), ...)  
+#  A <- x
+  ind <- !(is.na(x) | is.na(M) | is.infinite(x) | is.infinite(M))
+  #lines(lowess(A[ind], M[ind], f = f), ...)
+  lines(approx(lowess(x[ind], M[ind], f = f)), ...)  
 }
 
 ########################################################################/**
@@ -279,15 +281,15 @@ plot.smooth.line  <- function(A, M, f = 0.1, ...)
 # \keyword{microarray, point-wise confidence band.}
 #*/########################################################################
 
-plot.confband.lines<-
-function (A, M, crit1=0.025, crit2=crit1, nclass=10, ...)
+plot.confband.lines<-function (x, M, crit1=0.025, crit2=crit1, nclass=10, ...)
 {
+#  A <- x
   if (crit1 >= 1) crit1 <- crit1 / length.na(M)
   if (crit2 >= 1) crit2 <- crit2 / length.na(M)
   cutoff<-NULL
-  Abin <- quantile(A, probs=seq(0, nclass, 1)/nclass, na.rm=T)
+  Abin <- quantile(x, probs=seq(0, nclass, 1)/nclass, na.rm=T)
   for(i in (1:nclass) ){
-    tmpind<-(Abin[i]<=A)&(A<Abin[i+1])
+    tmpind<-(Abin[i]<=x)&(x<Abin[i+1])
     xtmp <- M
     xtmp[!tmpind]<-NA
     n1<-sum.na(tmpind)
@@ -366,16 +368,18 @@ function (A, M, crit1=0.025, crit2=crit1, nclass=10, ...)
 #*/########################################################################
  
 
-plot.confband.points<-function (A, M, crit1=0.025, crit2=crit1, nclass=10, col.ex=NULL, ...)
+plot.confband.points<-function (x, M, crit1=0.025, crit2=crit1, nclass=10, col.ex=NULL, ...)
 {
   ## quantile.na removes infinite too...quantile(x, na.rm=F) doesn't.
+
+  # A <- x
   
   if (crit1 >= 1) crit1 <- crit1 / length.na(M)
   if (crit2 >= 1) crit2 <- crit2 / length.na(M)  
-  txtA<-(rep(FALSE,length(A)))
-  Abin <- quantile(A, probs=seq(0, nclass, 1)/nclass, na.rm=T)
+  txtA<-(rep(FALSE,length(x)))
+  Abin <- quantile(x, probs=seq(0, nclass, 1)/nclass, na.rm=T)
   for(i in 1:nclass){
-    tmpind<-(Abin[i]<=A)&(A<Abin[i+1])
+    tmpind<-(Abin[i]<=x)&(x<Abin[i+1])
     xtmp <- M
     xtmp[!tmpind]<-NA
     n1<-sum.na(tmpind)
@@ -383,7 +387,7 @@ plot.confband.points<-function (A, M, crit1=0.025, crit2=crit1, nclass=10, col.e
     vals<- ((xtmp < cutoff[1]) | (xtmp > cutoff[2]))
     txtA[vals]<-TRUE 
   }
-  points(A[txtA],M[txtA],pch=18, col=col.ex,...)
+  points(x[txtA],M[txtA],pch=18, col=col.ex,...)
 }
 
 
@@ -456,15 +460,16 @@ plot.confband.points<-function (A, M, crit1=0.025, crit2=crit1, nclass=10, col.e
  
 
  plot.confband.text <- 
-function (A, M, crit1=0.025, crit2=crit1, nclass=10, labs=NULL, output=F, ...) 
+function (x, M, crit1=0.025, crit2=crit1, nclass=10, labs=NULL, output=F, ...) 
 {
+#  A <- x
   if (crit1 >= 1) crit1 <- crit1 / length.na(M)
   if (crit2 >= 1) crit2 <- crit2 / length.na(M)
 
-  txtA<-(rep(FALSE,length(A)))
-  Abin <- quantile.na(A, probs=seq(0, nclass, 1)/nclass)
+  txtA<-(rep(FALSE,length(x)))
+  Abin <- quantile.na(x, probs=seq(0, nclass, 1)/nclass)
   for(i in 1:nclass){
-    tmpind<-(Abin[i]<=A)&(A<Abin[i+1])
+    tmpind<-(Abin[i]<=x)&(x<Abin[i+1])
     xtmp <- M    
     xtmp[!tmpind]<-NA
     n1<-sum.na(tmpind)
@@ -473,7 +478,7 @@ function (A, M, crit1=0.025, crit2=crit1, nclass=10, labs=NULL, output=F, ...)
     txtA[vals]<-TRUE
   }
   if(is.null(labs)) labs <- as.character(1:length(M))
-  text(A[txtA],M[txtA],labels=labs[txtA], ...)
+  text(x[txtA],M[txtA],labels=labs[txtA], ...)
   if(output)
     res <- txtA
   else res <- NULL
@@ -484,3 +489,6 @@ function (A, M, crit1=0.025, crit2=crit1, nclass=10, labs=NULL, output=F, ...)
 ##########################################################################
 #                                End of file
 ##########################################################################
+
+
+

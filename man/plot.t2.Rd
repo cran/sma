@@ -21,12 +21,12 @@ defined thresholds are highlighted.
 } 
 
 \usage{
-plot.t2(X, main.title="T plots", low=-5, high=5)
+plot.t2(x, main.title="T plots", low=-5, high=5,...)
 }
 
 \arguments{
 
- \item{X}{output from the function \code{\link{stat.t2}}.}
+ \item{x}{output from the function \code{\link{stat.t2}}.}
 
  \item{main.title}{title for the plot.}
 
@@ -34,7 +34,8 @@ plot.t2(X, main.title="T plots", low=-5, high=5)
  colored in green.} 
 
  \item{high}{upper threshold for t-statistic: points with t>high are
- colored in red.} 
+   colored in red.}
+ \item{\dots}{additional graphical parameters}
 }
 
 \author{

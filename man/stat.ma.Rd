@@ -57,7 +57,7 @@ stat.ma(RG, layout, norm="p", pout=FALSE, ...)
 
   \item{pout}{if TRUE, an M vs. A plot will be produced. Otherwise,
   a matrix of log intensity ratios and average log intensities is
-  return.  By default pout is set to FALSE.  The option pout='TRUE'
+  return.  By default pout is set to FALSE.  The option pout='TURE'
   is not yet implemented.}
 
   \item{\dots}{other parameters used in \code{\link{ma.func}}. }
@@ -97,8 +97,8 @@ data(MouseArray)
 mouse.lratio <- stat.ma(mouse.data, mouse.setup)
 }
 
-\keyword{manip}
 %\keyword{microarray, log ratio.}
+\keyword{datagen}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -130,13 +130,14 @@ rgcolors.func<-function(n = 50)
 # 
 #*/#######################################################################
 
- plot.cor<-function(X, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
+ plot.cor<-function(x, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
  {
-   n<-ncol(X)
-   corr<-X
+#   X <- x
+   n<-ncol(x)
+   corr<-x
  
    if(new)
-     corr<-cor.na(X)
+     corr<-cor.na(x)
   
    image(1:n,1:n,corr[,n:1],col=rgcolors.func(nrgcols),axes=FALSE, xlab="", ylab="",... ) 
  
@@ -226,12 +227,13 @@ rgcolors.func<-function(n = 50)
 # 
 #*/#######################################################################
 
-plot.mat<-function(X, nrgcols=50, rlabels=F, clabels=F, rcols=1, ccols=1, title="", ...)
+plot.mat<-function(x, nrgcols=50, rlabels=F, clabels=F, rcols=1, ccols=1, title="", ...)
 {
-  n<-nrow(X)
-  p<-ncol(X)	  
+#  X <-x
+  n<-nrow(x)
+  p<-ncol(x)	  
 
-  image(1:p,1:n,t(X[n:1,]),col=rgcolors.func(nrgcols),axes=FALSE, xlab="", ylab="", ... ) 
+  image(1:p,1:n,t(x[n:1,]),col=rgcolors.func(nrgcols),axes=FALSE, xlab="", ylab="", ... ) 
 
   if(length(ccols)==1){
     axis(3,at=1:p,labels=clabels,las=2,cex.axis=0.6,col.axis=ccols)

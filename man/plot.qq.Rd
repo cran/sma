@@ -18,7 +18,7 @@ histogram and Q-Q plots are displayed on the same page.
 }
 
 \usage{
-plot.qq(x, name, low=-5, high=5)
+plot.qq(x, name, low=-5, high=5,...)
 }
 
 \arguments{
@@ -32,7 +32,8 @@ plot.qq(x, name, low=-5, high=5)
  in green.}
 
  \item{high}{upper threshold: points with statistic > high are
- colored in red.} 
+   colored in red.}
+ \item{\dots}{additional graphical parameters}
 } 
 
 \references{Chambers, J. M., Cleveland, W. S., Kleiner, B. and

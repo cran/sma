@@ -28,7 +28,6 @@ plot.qqline(x, y, a=0.25, ...)
 \item{x}{the reference (first) sample for the Q-Q plot, for a normal Q-Q
   plot this would be the quantiles of a N(0,1) random sample.}
 \item{y}{the data.}
-}
 \item{a}{a number between 0 and 1. A line is drawn which connects the
   \code{a} and \code{1-a} quantile points. The default line passes
   through the first and third quantiles.}

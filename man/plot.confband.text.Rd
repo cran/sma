@@ -15,14 +15,14 @@
   coordinates given by `M' and `A'}
 
 \usage{
-plot.confband.text(A, M, crit1=0.025, crit2=crit1, nclass=10,
+plot.confband.text(x, M, crit1=0.025, crit2=crit1, nclass=10,
 labs=NULL, output=F, ...)  
 }
 
 \arguments{
- \item{A}{a vector giving the x-coordinates of the points in the scatter
+ \item{x}{a vector giving the x-coordinates of the points in the scatter
           plot. In the microarray context, this could be a vector of
-          average log intensities.} 
+          average log intensities. ie A} 
  
  \item{M}{a vector giving the y-coordinates of the points in the scatter
    plot. In the microarray context, this could be a vector of log

@@ -20,13 +20,13 @@
   The type of line may be specified as well as other parameters.}
 
 \usage{
-plot.confband.line(A, M, crit1=0.025, crit2=crit1, nclass=10, ...)
+plot.confband.lines(x, M, crit1=0.025, crit2=crit1, nclass=10, ...)
 }
 
 \arguments{
- \item{A}{a vector giving the x-coordinates of the points in the scatter
+ \item{x}{a vector giving the x-coordinates of the points in the scatter
           plot. In the microarray context, this could be a vector of
-          average log intensities.} 
+          average log intensities, ie A} 
 
  \item{M}{a vector giving the y-coordinates of the points in the scatter
    plot. In the microarray context, this could be a vector of log

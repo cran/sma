@@ -20,13 +20,13 @@ respectively.
 }
 
 \usage{
-plot.mva(RG, layout, norm="p", pout=T, image.id=1, extra.type="tci",
+plot.mva(x, layout, norm="p", pout=T, image.id=1, extra.type="tci",
 crit1=0.025,crit2=crit1, nclass=10, labs=NULL, plot.type="n",
 col.ex=NULL,pch=".", ...) 
 }
 
 \arguments{
-  \item{RG}{A list with at least 4 elements.  Each element of the list
+  \item{x}{A list with at least 4 elements.  Each element of the list
     being a matrix with p rows for p genes and n columns for n slides. 
     The first element 'R' contains the raw red intensities,
     the second element 'G' contains the raw green intensities,
@@ -84,7 +84,8 @@ col.ex=NULL,pch=".", ...)
    * "b" both unnormalised and normalised M vs A plots.
   }
  \item{col.ex}{The colour used for the highlighting extreme points,
- lines or text.} 
+   lines or text.}
+ \item{pch}{The plotting character for points}
  \item{\dots}{graphical parameters may also be supplied as arguments to the
     function (see \code{\link{par}}).  }
 }

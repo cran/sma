@@ -18,6 +18,7 @@
   `init.show.exp' displays the look-up table created by
   \code{init.name.exp}.
 }
+
 \usage{
 init.name.exp(Robject=F)
 init.show.exp(batch)

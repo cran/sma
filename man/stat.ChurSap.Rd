@@ -46,7 +46,7 @@ stat.ChurSap(RG,layout,pp=0.95,norm="p", pout=T, image.id=1,...)
 
   \item{pout}{if TRUE, an M vs. A plot will be produced with limits due
     to Churchill and Sapir at the specified posterior probability level. If FALSE, return a list with pertinant information}
-    
+  \item{\dots}{additional graphical parameters}
 }
 
 

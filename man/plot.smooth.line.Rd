@@ -17,13 +17,13 @@
  parameters.} 
 
 \usage{
-plot.smooth.line(A, M, f=0.1, ...)
+plot.smooth.line(x, M, f=0.1, ...)
 }
 
 \arguments{
- \item{A}{a vector giving the x-coordinates of the points in the scatter
+ \item{x}{a vector giving the x-coordinates of the points in the scatter
           plot. In the microarray context, this could be a vector of
-          average log intensities.} 
+          average log intensities. ie A} 
 
  \item{M}{a vector giving the y-coordinates of the points in the scatter
           plot. In the microarray context, this could be a vector of

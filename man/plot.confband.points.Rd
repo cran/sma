@@ -17,13 +17,13 @@
 }
 
 \usage{
-plot.confband.points(A, M, crit1=0.025, crit2=crit1, nclass=10,col.ex=NULL, ...)
+plot.confband.points(x, M, crit1=0.025, crit2=crit1, nclass=10, col.ex, ...)
 }
 
 \arguments{
- \item{A}{a vector giving the x-coordinates of the points in the scatter
+ \item{x}{a vector giving the x-coordinates of the points in the scatter
           plot. In the microarray context, this could be a vector of
-          average log intensities.} 
+          average log intensities. ie A} 
 
  \item{M}{a vector giving the y-coordinates of the points in the scatter
    plot. In the microarray context, this could be a vector of log
@@ -37,7 +37,8 @@ plot.confband.points(A, M, crit1=0.025, crit2=crit1, nclass=10,col.ex=NULL, ...)
  spots with the largest M values will be highlighted. If crit2 >= 1,
  the crit2 spots with the smallest M values are highlighted.}  
  \item{nclass}{A single number giving the approximate number of
- intensity depedent groups to consider.} 
+   intensity depedent groups to consider.}
+ \item{col.ex}{A color for extreme points}
  \item{\dots}{graphical parameters may also be supplied as arguments
  to the function (see \code{\link{par}}).}        
 }

@@ -6,9 +6,10 @@
 # Created on Nov 20,2000 
 #
 # last modified by bmb
-# last modified on Nov 20, 2000
+# last modified on Nov 15, 2001
 #
 # History:
+# Nov 15, 2001 Added plot.single.slides function
 # Nov 20, 2000 Initial version, created by combining
 #              func.churchill.s, func.newton.s
 # Jan 18, 2000 Make fixes to complete integration into sma
@@ -313,13 +314,13 @@ stat.ChurSap.ma <- function(MA,pp,pout=T, image.id=1,...)
 # A) newton.func.rotate <- 
 ###########################################################################
 
-newton.plot.rotate <- function(A, M, theta)
+newton.plot.rotate <- function(A, M, theta,...)
 {
 ## Input A and M
   ind <- is.na(A) | is.na(M) | is.infinite(A) | is.infinite(M)
   A <- A[!ind]
   M <- M[!ind]
-  plot(A, M, pch=".",xlab="A", ylab="M", type="n")
+  plot(A, M,xlab="A", ylab="M", type="n",...)
   vec1 <- seq(range(A)[1], range(A)[2], length=150)
   vec2 <- seq(range(M)[1], range(M)[2], length=150)
 ##  theta <- fits[1,]
@@ -327,8 +328,8 @@ newton.plot.rotate <- function(A, M, theta)
   bf <- outer(vec1,vec2,"lod2",theta=theta)
   bar <- contour(vec1,vec2,bf,levels=c(0,1,2), save=T, plotit=T, add=T,
 		 labex=0, lwd=2 )
-  points( A[logbf >=0], M[logbf>=0], cex=.6 , col=2)
-  points( A[logbf < 0], M[logbf< 0], cex=.6 , col=3)
+  points( A[logbf >=0], M[logbf>=0], cex=.6 , col=2,...)
+  points( A[logbf < 0], M[logbf< 0], cex=.6 , col=3,...)
 ##  box()
 
 }
@@ -630,5 +631,22 @@ stat.Chen.ma <- function(MA,image.id,pout=T){
 
 
 
+plot.single.slide <- function(x,layout,norm="p",image.id=1,...){
+  #RG <- x
+  MA <- stat.ma(x, layout, norm, pout = F)
+  Newton <- stat.Newton.ma(MA,image.id, pout=F)
+  ChurSap <- stat.ChurSap.ma(MA,pp=0.95,pout=F,image.id)
+  ChurSap2 <- stat.ChurSap.ma(MA,pp=0.99,pout=F,image.id)
+  Chen <- stat.Chen.ma(MA,image.id,pout=F)
+  newton.plot.rotate(MA$A[,image.id],MA$M[,image.id],Newton$theta,...)
+  abline(h=Chen$lower01,col=4,lty=2,lwd=2)
+  abline(h=Chen$upper01,col=4,lty=2,lwd=2)
+  abline(h=Chen$lower05,col=5,lty=2,lwd=2)
+  abline(h=Chen$upper05,col=5,lty=2,lwd=2)
+  abline(h=ChurSap$limit,col=6,lty=3,lwd=2)
+  abline(h=-ChurSap$limit,col=6,lty=3,lwd=2)
+  abline(h=ChurSap2$limit,col=9,lty=3,lwd=2)
+  abline(h=-ChurSap2$limit,col=9,lty=3,lwd=2)
+}
 
 

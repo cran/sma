@@ -7,12 +7,12 @@
   highlighting genes meeting userspecified criteria.
 }
 \usage{
-plot.bayesian(bay=NULL, Mbar=bay$Xprep$Mbar, lods=bay$lods, 
-type="t", spec=50, ch=NULL, col="black")
+plot.bayesian(x=NULL, Mbar=bay$Xprep$Mbar, lods=bay$lods, 
+type="t", spec=50, ch=NULL, col="black",...)
 }
 
 \arguments{
-  \item{bay}{output from stat.bayesian() or stat.bay.est()}
+  \item{x}{output from stat.bayesian() or stat.bay.est()}
   \item{Mbar}{Effect estimate for each gene.}
   \item{lods}{Posterior lodsratio for each gene.}
   \item{type}{Type of criteria for highlighting genes (see details).}
@@ -20,6 +20,7 @@ type="t", spec=50, ch=NULL, col="black")
   \item{ch}{Character with which to selected highlight genes. (Default
     is the gene index.)}
   \item{col}{Colour of highlighted genes. (Default is black.)}
+  \item{\dots}{Additional graphical parameters}
 }
 
 \details{

@@ -96,6 +96,38 @@ svb.func <- function(Signal, Bg, S.isbgcor = F, ...)
   }
 }
 
+#######################################################
+# plot.print.tip.lowess - a function to print individual
+# lowess curves for each print tip super imposed onto an
+# m vs a  plot.
+#
+# TO be added a linetype palette, functionality to add
+# an index
+#
+#######################################################
+
+plot.print.tip.lowess <- function (x, layout, norm = "n", image.id = 1, palette = rainbow(layout$ngrid.r*layout$ngrid.c), lty.palette = rep(1,layout$ngrid.r*layout$ngrid.c), ...) 
+{
+    tmp <- ma.func(R = x$R[, image.id], G = x$G[, image.id], 
+        Rb = x$Rb[, image.id], Gb = x$Gb[, image.id], layout, 
+        norm = norm, pout = F, ...)
+    plot(tmp$A, tmp$M, xlab = "A", ylab = "M", ...)
+    npin <- layout$ngrid.r * layout$ngrid.c
+    nspot <- layout$nspot.c * layout$nspot.r
+    pin <- rep(1:npin, rep(nspot, npin))
+    for (i in 1:npin) {
+        index <- pin == i
+        tM <- tmp$M[index]
+        tA <- tmp$A[index]
+        ind2 <- is.na(tM) | is.na(tA) | is.infinite(tM) | is.infinite(tA)
+        smoothnum <- lowess(tA[!ind2], tM[!ind2])
+        lines(approx(smoothnum), col = palette[i], lty = lty.palette[i], ...)
+    }
+}
+
+
+
+
 
 ##########################################################################
 # Diagnostic plots for multiple slides only
@@ -167,7 +199,7 @@ svb.func <- function(Signal, Bg, S.isbgcor = F, ...)
 # 
 #*/######################################################################/**
 
-plot.qq <- function(x,name, low=-5, high=5)
+plot.qq <- function(x,name, low=-5, high=5,...)
 {
   par(mfrow=c(2,1))
   hist(x,xlab="t",nclass=100,main=paste(name," Histogram and quantile-quantile plot of t-statistics", sep=":"),col=9,cex=0.8)
@@ -378,44 +410,44 @@ function(x, layout=NULL, x.names=NULL, ...)
 #*/######################################################################/**
 
 
-plot.t2 <- function(X, main.title="T plots", low=-5,high=5)
+plot.t2 <- function(x, main.title="T plots", low=-5,high=5,...)
 {
   par(mfrow=c(2,2),oma=c(1,1,3,1))
 
-  lowt<-X$t < low
-  hight<-X$t > high
+  lowt<-x$t < low
+  hight<-x$t > high
  
   # 1. t vs. avg. A
-  plot(X$A.bar,X$t,xlab="average A",ylab="t",pch=".",
+  plot(x$A.bar,x$t,xlab="average A",ylab="t",pch=".",
        main="t vs. average A",cex=0.8)
   if(sum.na(lowt)>0)
-    points(X$A.bar[lowt],X$t[lowt],pch="*",col=6,cex=1.5)
+    points(x$A.bar[lowt],x$t[lowt],pch="*",col=6,cex=1.5)
   if(sum.na(hight)>0)
-    points(X$A.bar[hight],X$t[hight],pch="*",col=2,cex=1.5)
+    points(x$A.bar[hight],x$t[hight],pch="*",col=2,cex=1.5)
 
    # 2. t_denom vs. avg. A
-   plot(X$A.bar,X$Den,xlab="average A",ylab="t denominator",
+   plot(x$A.bar,x$Den,xlab="average A",ylab="t denominator",
 	pch=".",main="t denominator vs. average A",cex=0.8)
   if(sum.na(lowt)>0)
-    points(X$A.bar[lowt],X$Den[lowt],pch="*",col=6,cex=1.5)
+    points(x$A.bar[lowt],x$Den[lowt],pch="*",col=6,cex=1.5)
   if(sum.na(hight)>0)
-    points(X$A.bar[hight],X$Den[hight],pch="*",col=2,cex=1.5)
+    points(x$A.bar[hight],x$Den[hight],pch="*",col=2,cex=1.5)
 
   # 3. |t_num| vs. avg. A
-  plot(X$A.bar,abs(X$Num),xlab="average A",ylab="|t numerator|",
+  plot(x$A.bar,abs(x$Num),xlab="average A",ylab="|t numerator|",
        pch=".",main="|t numerator| vs. average A",cex=0.8)
   if(sum.na(lowt)>0)
-    points(X$A.bar[lowt],abs(X$Num[lowt]),pch="*",col=6,cex=1.5)
+    points(x$A.bar[lowt],abs(x$Num[lowt]),pch="*",col=6,cex=1.5)
   if(sum.na(hight)>0)
-    points(X$A.bar[hight],abs(X$Num[hight]),pch="*",col=2,cex=1.5)
+    points(x$A.bar[hight],abs(x$Num[hight]),pch="*",col=2,cex=1.5)
 
   # 4. t_denom vs. |t_num|
-  plot(abs(X$Num) , X$Den ,xlab="|t numerator|",ylab="t denominator",
+  plot(abs(x$Num) , x$Den ,xlab="|t numerator|",ylab="t denominator",
        pch=".",main="t denominator vs. |t numerator|",cex=0.8)
   if(sum.na(lowt)>0)
-    points(abs(X$Num[lowt]),X$Den[lowt],pch="*",col=6,cex=1.5)
+    points(abs(x$Num[lowt]),x$Den[lowt],pch="*",col=6,cex=1.5)
   if(sum.na(hight)>0)
-    points(abs(X$Num[hight]),X$Den[hight],pch="*",col=2,cex=1.5)
+    points(abs(x$Num[hight]),x$Den[hight],pch="*",col=2,cex=1.5)
 
   par(mfrow=c(1,1))
   mtext(main.title, line=4,cex=1.5)

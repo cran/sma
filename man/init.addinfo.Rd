@@ -30,9 +30,10 @@ init.addinfo(batch, attri, dataname=NULL, ...)
     included in the data structure.  For example, from the output of
     \tt{Spot}, this argument can be "area", "signal to noise" etc.
     In other words, these are the column headings from the raw data set.}
-    \item{dataname}{A name of your experimental data.  By default it's
+   \item{dataname}{A name of your experimental data.  By default it's
       named "batch.exp" where batch is the name of the collection of
       experiments you are interested in.}
+   \item{...}{Other arguments}
   }
 
 \value{

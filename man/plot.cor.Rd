@@ -20,11 +20,11 @@ increasing intensity.
 }
 
 \usage{
-plot.cor(X, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
+plot.cor(x, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
 }
 
 \arguments{
- \item{X}{a matrix of numerical values.}
+ \item{x}{a matrix of numerical values.}
  \item{new}{If \code{new=F}, \code{X} must already be a correlation
  matrix. If \code{new=T}, the correlation matrix for the columns of
  \code{X} is computed and displayed in the image.} 

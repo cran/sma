@@ -91,7 +91,8 @@ stat.bay.est <- function(M=NULL, Xprep=NULL, para=list(p=0.01, v = NULL, a=NULL,
 }
 
 
-plot.bayesian<-function(bay=NULL,Mbar=bay$Xprep$Mbar,lods=bay$lods, type="t",spec=50, ch=NULL, col='black'){
+plot.bayesian<-function(x=NULL,Mbar=x$Xprep$Mbar,lods=x$lods, type="t",spec=50, ch=NULL, col='black',...){
+  #bay <- x
   index<-NULL
   if(type=="t") index<-(1:length(lods))[lods>sort(lods[!is.na(lods)])[length(lods[!is.na(lods)])-spec]]   
   if(type=="c") index<-(1:length(lods))[lods >= spec]

@@ -22,10 +22,12 @@ plot.confband.text       Add Selected Text to an M vs A Plot
 plot.cor                 Red and Green Color Image of Correlation Matrix
 plot.mat                 Red and Green Color Image of Data Matrix
 plot.mva                 M vs. A Plot
+plot.print.tip.lowess    M vs. A Plot with print tip lowess lines
 plot.qq                  Histogram and Normal Quantile-Quantile plot
 plot.qqline              Add Line Going Through the Quantiles of a Q-Q
                          Plot
 plot.scale.box           Box plots for microarray
+plot.single.slide        M vs. A Plot
 plot.smooth.line         Adding Lowess Lines to Current Plot
 plot.spatial             Spatial Representation of Microarray Spot
                          Statistics
