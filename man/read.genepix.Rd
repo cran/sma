@@ -4,6 +4,8 @@
 % Rdoc is copyright (C) 2001, Henrik Bengtsson, henrikb@braju.com.
 % Download the Rdoc compiler at http://www.braju.com/R/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Actually RDoc not used here.
+
 
 \name{read.genepix}
 
@@ -21,7 +23,7 @@ with the same number of rows as there are lines in the
 }
 
 \usage{
-read.genepix(name, dir = ".", sep = "\t", header = T, skip = 26, ...) 
+read.genepix(name, dir = ".", sep = "\t", header = TRUE, skip = 26, gpname = c("Block", "Col", "Row", "Name", "ID", "X","Y", "Dia", "Rmed", "Rmean", "RSD", "Rbmed", "Rbmean", "RbSD", "Rb1SD", "Rb2SD", "Rbsat","Gmed", "Gmean", "GSD", "Gbmed", "Gbmean", "GbSD", "Gb1SD", "Gb2SD", "Gbsat", "ratiomed", "ratiomean", "medratio", "meanratio", "ratiosd", "Rratio", "RegR2", "FPixels", "BPixels", "summed", "summean", "logratio", "Rmedc", "Gmedc", "Rmeanc", "Gmedc", "flags"),...) 
 }
 
 \arguments{
@@ -41,7 +43,11 @@ data. }
 
  \item{skip}{the number of lines of the data file to skip before beginning
    to read data.}
- 
+
+ \item{gpname}{A vector of column names. SOme of the column names from
+   genepix contain non standard characters, so useful to redefine to
+   something R likes to use. Also newer versions of genepix have more columns}
+
  \item{\dots}{parameters for read.table may also be supplied as arguments to
    the function (see  \code{\link{read.table}}).  }
 }

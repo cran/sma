@@ -20,7 +20,7 @@ increasing intensity.
 }
 
 \usage{
-plot.cor(x, new=F, nrgcols=50, labels=F, labcols=1, title="", ...)
+plot.cor(x, new=FALSE, nrgcols=50, labels=FALSE, labcols=1, title="", ...)
 }
 
 \arguments{

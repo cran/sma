@@ -6,7 +6,7 @@
 #
 # History:
 #    March 19, 2001: The spatial plot functions from Rarray.R.
-#					
+#    Jan 25, 2004: Fix a bug in					
 #
 # Authors: Sandrine Dudoit and Yee Hwa (Jean) Yang.
 ##########################################################################
@@ -92,8 +92,8 @@
 
 plot.spatial <- function(x, layout, crit1=0.05, crit2=crit1,  ...)
 {
-  if (crit1 >= 1) crit1 <- crit1 / (length.na(x) - sum(is.na(x)))
-  if (crit2 >= 1) crit2 <- crit2 / (length.na(x) - sum(is.na(x)))
+  if (crit1 >= 1) crit1 <- crit1 / (length.na(x))
+  if (crit2 >= 1) crit2 <- crit2 / (length.na(x))
   
 #  if(crit < 1)
 #    tmpind <- x > quantile.na(x, 1-crit)

@@ -16,7 +16,7 @@
   each gene in the slide being considered.} 
 
 \usage{
-init.read.exp(batch, imageid, sep="\t", header=T, ...)}
+init.read.exp(batch, imageid, sep="\t", header=TRUE, ...)}
 
 \arguments{
  \item{batch}{batch name of the experiment}

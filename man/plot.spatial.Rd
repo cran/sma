@@ -22,7 +22,7 @@ can be used to explore whether there are any spatial effects in the data.
 }
 
 \usage{
-plot.spatial(x, layout, crit1=0.15, crit2=crit1, ...)
+plot.spatial(x, layout, crit1=0.05, crit2=crit1, ...)
 }
 
 \arguments{

@@ -7,7 +7,7 @@
   highlighting genes meeting userspecified criteria.
 }
 \usage{
-plot.bayesian(x=NULL, Mbar=bay$Xprep$Mbar, lods=bay$lods, 
+plot.bayesian(x=NULL, Mbar=x$Xprep$Mbar, lods=x$lods, 
 type="t", spec=50, ch=NULL, col="black",...)
 }
 

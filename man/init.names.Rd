@@ -20,7 +20,7 @@
 }
 
 \usage{
-init.name.exp(Robject=F)
+init.name.exp(Robject=FALSE)
 init.show.exp(batch)
 }
 

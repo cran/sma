@@ -1,4 +1,5 @@
 \name{MouseArray}
+\alias{MouseArray}
 \alias{mouse1}
 \alias{mouse2}
 \alias{mouse3}

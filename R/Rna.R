@@ -5,6 +5,9 @@
 # Date : March 19, 2001
 #
 # Authors: Sandrine Dudoit and Yee Hwa (Jean) Yang.
+#
+# Feb 2, 2004 - add "..." to sum.na and prod.na
+#
 ##########################################################################
 
 ##########################################################################
@@ -81,7 +84,7 @@ cor.na <- function(x)
   cor(x, use="pairwise.complete.obs")
 }
 
-sum.na <- function(x)
+sum.na <- function(x,...)
 {
         res <- NA
         tmp <- !(is.na(x) | is.infinite(x))
@@ -161,7 +164,7 @@ scale.na<-function(x, center = TRUE, scale = TRUE)
     x
 }
 
-prod.na <- function (x) 
+prod.na <- function (x,...) 
 {
   prod(x[!(is.na(x) | is.infinite(x))])
 }

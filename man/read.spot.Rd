@@ -20,7 +20,7 @@ of columns as there are fields in the file.\cr
 }
 
 \usage{
-read.spot(name, dir=".", sep=",", header=T, ...)
+read.spot(name, dir=".", sep="\t", header=TRUE, ...)
 }
 
 \arguments{

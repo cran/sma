@@ -18,7 +18,7 @@ are represented with greens of increasing intensity.
 }
 
 \usage{
-plot.mat(x, nrgcols=50, rlabels=F, clabels=F, rcols=1, ccols=1, title="",...)
+plot.mat(x, nrgcols=50, rlabels=FALSE, clabels=FALSE, rcols=1, ccols=1, title="",...)
 }
 
 %- maybe also `usage' for other objects documented here.

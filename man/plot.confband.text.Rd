@@ -16,7 +16,7 @@
 
 \usage{
 plot.confband.text(x, M, crit1=0.025, crit2=crit1, nclass=10,
-labs=NULL, output=F, ...)  
+labs=NULL, output=FALSE, ...)  
 }
 
 \arguments{

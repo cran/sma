@@ -18,7 +18,7 @@ microarray experiment.
 }
 
 \usage{
-stat.t2(X, cl, x.ratio=F, var.equal=T, ...)
+stat.t2(X, cl, x.ratio=FALSE, var.equal=TRUE, ...)
 }
 
 \arguments{

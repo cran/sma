@@ -18,7 +18,7 @@ and background intensities.
 }
 
 \usage{
-plot.svb(x, channel="R", image.id=1, S.isbgcor=F, ...)
+plot.svb(x, channel="R", image.id=1, S.isbgcor=FALSE, ...)
 }
 
 \arguments{

@@ -10,8 +10,13 @@
 #   March, 19: Insert comments from the help files
 #   Nov, 10: Change data structure from matrix to list of matrix.  
 #   Feb 12, 2003: Fix a bug in init.name.exp  init.readexp -> init.read.exp
+#   Aug 15, 2003: Allow teh column names to be specified in read.genepix
+#                 because some newer versions of genepix have more
+#                 columns. We will allow the user to decide how they want to
+#                 name the columns.
 #
 # Authors: Sandrine Dudoit, Yee Hwa (Jean) Yang and Natalie Roberts
+#          with occasional maintanence from B. M. Bolstad
 ##########################################################################
 
 ##########################################################################
@@ -216,10 +221,10 @@ read.spot <- function(name, dir=".", sep="\t", header=TRUE,  ...)
 # 
 #*/#####################################################################
  
-read.genepix <- function (name, dir = ".", sep = "\t", header = TRUE, skip=26, ...) 
+read.genepix <- function (name, dir = ".", sep = "\t", header = TRUE, skip=26, gpname = c("Block", "Col", "Row", "Name", "ID", "X","Y", "Dia", "Rmed", "Rmean", "RSD", "Rbmed", "Rbmean", "RbSD", "Rb1SD", "Rb2SD", "Rbsat","Gmed", "Gmean", "GSD", "Gbmed", "Gbmean", "GbSD", "Gb1SD", "Gb2SD", "Gbsat", "ratiomed", "ratiomean", "medratio", "meanratio", "ratiosd", "Rratio", "RegR2", "FPixels", "BPixels", "summed", "summean", "logratio", "Rmedc", "Gmedc", "Rmeanc", "Gmedc", "flags"),...) 
 {
     newname <- paste(dir, name, sep = "/")
-    gpname <- c("Block", "Col", "Row", "Name", "ID", "X","Y", "Dia", "Rmed", "Rmean", "RSD", "Rbmed", "Rbmean", "RbSD", "Rb1SD", "Rb2SD", "Rbsat","Gmed", "Gmean", "GSD", "Gbmed", "Gbmean", "GbSD", "Gb1SD", "Gb2SD", "Gbsat", "ratiomed", "ratiomean", "medratio", "meanratio", "ratiosd", "Rratio", "RegR2", "FPixels", "BPixels", "summed", "summean", "logratio", "Rmedc", "Gmedc", "Rmeanc", "Gmedc", "flags")
+    #gpname <- c("Block", "Col", "Row", "Name", "ID", "X","Y", "Dia", "Rmed", "Rmean", "RSD", "Rbmed", "Rbmean", "RbSD", "Rb1SD", "Rb2SD", "Rbsat","Gmed", "Gmean", "GSD", "Gbmed", "Gbmean", "GbSD", "Gb1SD", "Gb2SD", "Gbsat", "ratiomed", "ratiomean", "medratio", "meanratio", "ratiosd", "Rratio", "RegR2", "FPixels", "BPixels", "summed", "summean", "logratio", "Rmedc", "Gmedc", "Rmeanc", "Gmedc", "flags")
     x <- read.table(newname, sep = sep, header = header, skip=skip,quote="", ...)
     colnames(x) <- gpname
     x

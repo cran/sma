@@ -9,7 +9,7 @@ Applies Newtons single slide method.
 
 
 \usage{
-stat.Newton(RG,layout,norm="p", image.id=1,pout=T)
+stat.Newton(RG,layout,norm="p", image.id=1,pout=TRUE)
 
 }
 
