@@ -1,8 +1,3 @@
 MouseArray              Mouse Gene Expression Data from cDNA microarray
-init.ctl.index          Generates co-ordinates of spots.
 na                      Basic Statistical Functions for Handling
                         Missing Values
-plot.qqline             Add Line Going Through the Quantiles of a Q-Q
-                        Plot
-plot.spatial            Spatial Representation of Microarray Spot
-                        Statistics

@@ -80,7 +80,7 @@ plot.spatial(mouse.lratio$M[,1], mouse.setup) ## default 85% cutoff
 plot.spatial(mouse1[,"shape"], mouse.setup, crit1=0.1)
 }   
 
-\keywords{hplot}
+\keyword{hplot}
 
 %\keyword{microarray, spatial.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

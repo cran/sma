@@ -56,7 +56,7 @@ plot.qqline(q, mouse.t2$t)
 }    
 
 
-\keywords{aplot}
+\keyword{aplot}
 
 %\keyword{Q-Q plots, quartiles}
 

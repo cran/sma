@@ -6,6 +6,7 @@
 \alias{mouse5}
 \alias{mouse6}
 \alias{mouse.gnames}
+\alias{MouseArray}
 
 \title{Mouse Gene Expression Data from cDNA microarray}
 
