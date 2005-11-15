@@ -35,9 +35,7 @@ init.read.exp(batch, imageid, sep="\t", header=TRUE, ...)}
   slide. \cr Details regarding these measurements can be found at
   \url{http://www.cmis.csiro.au/iap/Spot/spotoutput.htm}.}
 
-\references{Spot manual
-\url{http://www.cmis.csiro.au/iap/Spot/spotmanual.htm}}.
-} 
+\references{Spot manual \url{http://www.cmis.csiro.au/iap/Spot/spotmanual.htm}}
 
 \author{Yee Hwa Yang, \email{yeehwa@stat.berkeley.edu}}
 

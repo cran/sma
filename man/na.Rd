@@ -49,8 +49,7 @@ all the values present in its arguments, omitting any missing values.
   \code{\link{var}}, \code{\link{cor}}, \code{\link{order}},
   \code{\link{scale}}, \code{link{prod}}.}
 
-\keyword{log, sum, mean, variance, correlation, order, scale,
-product, missing values, NA.} 
+\keyword{manip} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of File
